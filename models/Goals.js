@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
-const goalSchema = new Schema({
+const goalSchema = new Schema({ 
   title: {
     type: String,
     trim: true,
@@ -23,7 +23,7 @@ const goalSchema = new Schema({
     type: Array,
   },
   encouragement: {
-    type: Number,
+    type: Number, 
   },
 });
 const Goal = mongoose.model("Goal", goalSchema);
