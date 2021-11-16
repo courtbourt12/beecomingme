@@ -20,6 +20,6 @@ const commentSchema = new Schema({
         required: true,
   },
 });
-const Step = mongoose.model("Step", commentSchema);
+const Comment = mongoose.model("Comment", commentSchema);
 
-module.exports = Step;
+module.exports = Comment;
