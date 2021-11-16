@@ -1,0 +1,29 @@
+{
+  "name": "Procountability",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "css": "node-sass --include-path scss scss/style.scss css/style.css",
+    "watch": "nodemon -e scss -x 'npm run css'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/courtbourt12/Procountability.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/courtbourt12/Procountability/issues"
+  },
+  "homepage": "https://github.com/courtbourt12/Procountability#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.1"
+  },
+  "devDependencies": {
+    "node-sass": "^6.0.1",
+    "nodemon": "^2.0.15"
+  }
+}
