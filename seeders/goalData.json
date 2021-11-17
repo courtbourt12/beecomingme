@@ -1,0 +1,10 @@
+[
+  {
+    "title": "Project 3",
+    "description": "To finish and deploy our project 3 MVP",
+    "owner": "",
+    "steps": ["step1", "step2", "step3", "step4"],
+    "users": ["user1", "user2", "user3", "user4"],
+    "encouragement": 4
+  }
+]

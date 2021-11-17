@@ -14,10 +14,14 @@ const commentSchema = new Schema({
   created: {
     type: Date,
     required: "Enter a deadline",
-    },
-    step: {
-        type: Number,
-        required: true,
+  },
+  // step: {
+  //   type: Schema.Types.ObjectId,
+  //   ref: 'Step',
+  // },
+  step: {
+    type: Number,
+    required: true,
   },
 });
 const Comment = mongoose.model("Comment", commentSchema);

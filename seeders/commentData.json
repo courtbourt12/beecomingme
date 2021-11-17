@@ -1,0 +1,26 @@
+[
+  {
+    "description": "Psuedocode comment",
+    "user": "user1",
+    "date": "2021-11-28",
+    "step": 1
+  },
+  {
+    "description": "Code comment",
+    "user": "user1",
+    "date": "2021-11-28",
+    "step": 2
+  },
+  {
+    "description": "Deploy comment",
+    "user": "user1",
+    "date": "2021-11-28",
+    "step": 3
+  },
+  {
+    "description": "Fix Errors comment",
+    "user": "user1",
+    "date": "2021-11-28",
+    "step": 4
+  }
+]

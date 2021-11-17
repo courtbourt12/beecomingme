@@ -1,0 +1,30 @@
+[
+  {
+    "title": "step1",
+    "description": "Psuedocode",
+    "status": 1,
+    "comments": [],
+    "due": "2021-11-28"
+  },
+  {
+    "title": "step2",
+    "description": "Code",
+    "status": 2,
+    "comments": ["comment1", "comment2", "comment3", "comment4"],
+    "due": "2021-11-29"
+  },
+  {
+    "title": "step3",
+    "description": "Deploy",
+    "status": 3,
+    "comments": ["comment1", "comment2", "comment3", "comment4"],
+    "due": "2021-11-30"
+  },
+  {
+    "title": "step4",
+    "description": "Fix Errors",
+    "status": 0,
+    "comments": ["comment1", "comment2", "comment3", "comment4"],
+    "due": "2021-12-01"
+  }
+]
