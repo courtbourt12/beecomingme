@@ -1,29 +1,24 @@
 {
-  "name": "Procountability",
+  "name": "beecomingme",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "css": "node-sass --include-path scss scss/style.scss css/style.css",
-    "watch": "nodemon -e scss -x 'npm run css'"
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web",
+    "eject": "expo eject"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/courtbourt12/Procountability.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/courtbourt12/Procountability/issues"
-  },
-  "homepage": "https://github.com/courtbourt12/Procountability#readme",
   "dependencies": {
-    "bcrypt": "^5.0.1"
+    "expo": "~43.0.2",
+    "expo-status-bar": "~1.1.0",
+    "react": "17.0.1",
+    "react-dom": "17.0.1",
+    "react-native": "0.64.3",
+    "react-native-web": "0.17.1"
   },
   "devDependencies": {
-    "node-sass": "^6.0.1",
-    "nodemon": "^2.0.15"
-  }
+    "@babel/core": "^7.12.9"
+  },
+  "private": true
 }
