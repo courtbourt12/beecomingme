@@ -1,0 +1,52 @@
+[
+  {
+    "username": "Courtney",
+    "email": "courtney@example.com",
+    "first_name": "Courtney",
+    "last_name": "Test",
+    "dob": "2002-04-03",
+    "password": "$2b$10$LeR5etAASLdCTiNpdkGUR.OomCM2cQECVtjhAqgM.sN/I4FE4bTdm",
+    "goals": [],
+    "friends": []
+  },
+  {
+    "username": "Joey",
+    "email": "joey@example.com",
+    "first_name": "Joey",
+    "last_name": "Test",
+    "dob": "2002-04-03",
+    "password": "$2b$10$LeR5etAASLdCTiNpdkGUR.OomCM2cQECVtjhAqgM.sN/I4FE4bTdm",
+    "goals": [],
+    "friends": []
+  },
+  {
+    "username": "Bradley",
+    "email": "bradley@example.com",
+    "first_name": "Bradley",
+    "last_name": "Test",
+    "dob": "2002-04-03",
+    "password": "$2b$10$LeR5etAASLdCTiNpdkGUR.OomCM2cQECVtjhAqgM.sN/I4FE4bTdm",
+    "goals": [],
+    "friends": []
+  },
+  {
+    "username": "Preksha",
+    "email": "preksha@example.com",
+    "first_name": "Preksha",
+    "last_name": "Test",
+    "dob": "2002-04-03",
+    "password": "$2b$10$LeR5etAASLdCTiNpdkGUR.OomCM2cQECVtjhAqgM.sN/I4FE4bTdm",
+    "goals": [],
+    "friends": []
+  },
+  {
+    "username": "Morgan",
+    "email": "morgan@example.com",
+    "first_name": "Morgan",
+    "last_name": "Test",
+    "dob": "2002-04-03",
+    "password": "$2b$10$LeR5etAASLdCTiNpdkGUR.OomCM2cQECVtjhAqgM.sN/I4FE4bTdm",
+    "goals": [],
+    "friends": []
+  }
+]

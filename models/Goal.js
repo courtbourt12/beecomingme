@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
-const goalSchema = new Schema({ 
+const goalSchema = new Schema({
   title: {
     type: String,
     trim: true,
@@ -12,18 +12,30 @@ const goalSchema = new Schema({
     type: String,
     required: true,
   },
+  // owner: {
+  //   type: Schema.Types.ObjectId,
+  //   ref: 'User',
+  // },
   owner: {
     type: Number,
     required: true,
   },
+  // steps: [{
+  //   type: Schema.Types.ObjectId,
+  //   ref: 'Step',
+  // }],
   steps: {
     type: Array,
   },
+  // users: [{
+  //   type: Schema.Types.ObjectId,
+  //   ref: 'User',
+  // }],
   users: {
     type: Array,
   },
   encouragement: {
-    type: Number, 
+    type: Number,
   },
 });
 const Goal = mongoose.model("Goal", goalSchema);
