@@ -12,28 +12,18 @@ const goalSchema = new Schema({
     type: String,
     required: true,
   },
-  // owner: {
-  //   type: Schema.Types.ObjectId,
-  //   ref: 'User',
-  // },
   owner: {
-    type: Number,
-    required: true,
+    type: Schema.Types.ObjectId,
+    ref: 'User',
   },
-  // steps: [{
-  //   type: Schema.Types.ObjectId,
-  //   ref: 'Step',
-  // }],
-  steps: {
-    type: Array,
-  },
-  // users: [{
-  //   type: Schema.Types.ObjectId,
-  //   ref: 'User',
-  // }],
-  users: {
-    type: Array,
-  },
+  steps: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Step',
+  }],
+  users: [{
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+  }],
   encouragement: {
     type: Number,
   },

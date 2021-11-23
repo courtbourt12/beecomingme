@@ -8,10 +8,10 @@ const stepSchema = new Schema({
     trim: true,
     required: "Enter a Title",
   },
-  // goal: {
-  //   type: Schema.Types.ObjectId,
-  //   ref: 'Goal',
-  // },
+  goal: {
+    type: Schema.Types.ObjectId,
+    ref: 'Goal',
+  },
   description: {
     type: String,
     required: true,
