@@ -15,13 +15,9 @@ const commentSchema = new Schema({
     type: Date,
     required: "Enter a deadline",
   },
-  // step: {
-  //   type: Schema.Types.ObjectId,
-  //   ref: 'Step',
-  // },
   step: {
-    type: Number,
-    required: true,
+    type: Schema.Types.ObjectId,
+    ref: 'Step',
   },
 });
 const Comment = mongoose.model("Comment", commentSchema);

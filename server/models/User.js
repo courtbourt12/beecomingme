@@ -32,13 +32,10 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
-  // goals: [{
-  //   type: Schema.Types.ObjectId,
-  //   ref: 'Goal',
-  // }],
-  goals: {
-    type: Array,
-  },
+  goals: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Goal',
+  }],
   friends: {
     type: Array,
   },
