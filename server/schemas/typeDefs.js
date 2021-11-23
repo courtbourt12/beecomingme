@@ -17,7 +17,7 @@ const typeDefs = gql`
     title: String
     description: String
     steps: [Step]
-    friends: [User]
+    friends: Array
     encouragement: Int
   }
 
