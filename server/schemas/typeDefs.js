@@ -10,23 +10,20 @@ const typeDefs = gql`
     dob: DateTime
     password: String
     goals: [Goal]
-    friends: [User]
   }
 
   type Goal {
     _id: ID
     title: String
     description: String
-    owner: String
     steps: [Step]
-    users: [User]
+    friends: [User]
     encouragement: Int
   }
 
   type Step {
     _id: ID
     title: String
-    goal: String
     description: String
     status: Int
     comments: [Comment]
@@ -38,7 +35,6 @@ const typeDefs = gql`
     description: String
     user: String
     created: DateTime
-    step: String
   }
   type Auth {
     token: ID!
@@ -46,48 +42,52 @@ const typeDefs = gql`
   }
 
   type Query {
-    users: [User]
+    friends: [User]
     user(user_id: ID!): User
     goals(user_id: ID!): [Goal]
     goal(goal_id: ID!): Goal
-    steps: [Step]
-    comments: [Comment]
+    steps(goal_id: ID!): [Step]
+    comments(step_id: ID!): [Comment]
   }
 
-  input addGoal {
+  input addUserInput {
+    username: String
+    email: String
+    first_name: String
+    last_name: String
+    dob: DateTime
+    password: String
+  }
+
+  input addGoalInput {
     title: String
     description: String
-    owner: String
-    steps: [Step]
-    users: [User]
-    encouragement: Int
   }
 
-  input Step {
+  input addStepInput {
     title: String
     description: String
     status: Int
-    comments: [Comment]
     due: DateTime
   }
 
   type Mutation {
     login(email: String!, password: String!): Auth
 
-    addUser(username: String!, email: String!, password: String!): Auth
+    addUser(input: addUser!): Auth
     addGoal(input: addGoal!): User
     addStep(input: addStep!): Goal
     addComment(description: String!): Step
 
-    removeUser(user_id: ID!): User
+    removeFriends(goal_id: ID!, user_id: ID!): User
     removeGoal(goal_id: ID!): User
     removeStep(step_id: ID!): Goal
-    removeComment(comment_id: ID!): Step
+    removeComment(step_id: ID!, comment_id: ID!): Step
 
     updateUser(user_id: ID!): User
-    updateGoal(input: addGoal!): User
-    updateStep(input: addStep!): Goal
-    updateComment(description: String!): Step
+    updateGoal(goal_id: ID!): User
+    updateStep(step_id: ID!): Goal
+    updateComment(comment_id: ID!): Step
   }
 `;
 
