@@ -1,21 +1,5 @@
 import { gql } from '@apollo/client';
 
-export const ADD_COMMENT = gql`
-  mutation addComment($thoughtId: ID!, $commentText: String!) {
-    addComment(thoughtId: $thoughtId, commentText: $commentText) {
-      _id
-      thoughtText
-      thoughtAuthor
-      createdAt
-      comments {
-        _id
-        commentText
-        createdAt
-      }
-    }
-  }
-`;
-
 export const LOGIN_USER = gql`
   mutation login($email: String!, $password: String!) {
     login(email: $email, password: $password) {
@@ -29,48 +13,164 @@ export const LOGIN_USER = gql`
 `;
 
 export const ADD_USER = gql`
-  mutation addUser($username: String!, $email: String!, $password: String!) {
-    addUser(username: $username, email: $email, password: $password) {
-      token
-      user {
+  mutation addUser($inputUser: addUserInput!) {
+    addUser(addUser: $inputUser) {
+        username
+        email
+        first_name
+        last_name
+        dob
+    }
+  }
+`;
+
+export const ADD_GOAL = gql`
+  mutation addGoal($inputGoal: addGoalInput!) {
+    addGoal(addGoal: $inputGoal) {
+        _id
+        title
+        description
+      }
+    }
+  }
+`;
+
+export const ADD_STEP = gql`
+  mutation addStep($inputStep: addStepInput!) {
+    addStep(addStep: $inputStep) {
+        _id
+        title
+        description
+        status
+        due
+      }
+    }
+  }
+`;
+
+export const ADD_COMMENT = gql`
+  mutation addComment($inputComment: addCommentInput!) {
+    addComment(addComment: $inputComment) {
+        _id
+        description
+        user
+        created
+      }
+    }
+  }
+`;
+
+export const REMOVE_GOAL = gql`
+  mutation removeGoal($goal_id: ID!) {
+    removeGoal(goal_id: $goal_id) {
         _id
         username
+        email
+        goals {
+            _id
+            title
+            description
+            steps
+            friends
+            encouragement
+        }
       }
     }
   }
 `;
 
-export const SAVE_BOOK = gql`
-  mutation saveBook($bookData: BookInput!) {
-    saveBook(bookData: $bookData) {
-      _id
-      username
-      email
-      savedBooks {
-        bookId
-        authors
-        image
-        description
-        title
-        link
+export const REMOVE_STEP = gql`
+  mutation removeStep($title: String!, $description: String!, $status: Int!, $due: DateTime!) {
+    removeStep(title: $title, description: $description, status: $status, due: $due) {
+        _id
+        username
+        email
+        steps {
+            _id
+            title
+            description
+            status
+            comments
+            due
+        }
       }
     }
   }
 `;
 
-export const REMOVE_BOOK = gql`
-  mutation removeBook($bookId: ID!) {
-    removeBook(bookId: $bookId) {
-      _id
-      username
-      email
-      savedBooks {
-        bookId
-        authors
-        image
+export const REMOVE_COMMENT = gql`
+  mutation removeComment($description: String!, $user: String!, $created: DateTime!) {
+    removeComment(description: $description, user: $user, created: $created) {
+        _id
+        username
+        email
+        comments {
+            _id
+            description
+            user
+            created
+        }
+      }
+    }
+  }
+`;
+
+export const REMOVE_FRIEND = gql`
+  mutation updateUser($user_id: ID!) {
+    updateUser(user_id: $user_id) {
+        _id
+        username
+        goals {
+            friends
+        }
+
+      }
+    }
+  }
+`;
+
+export const UPDATE_USER = gql`
+  mutation updateUser($user_id: ID!) {
+    updateUser(user_id: $user_id) {
         description
+        user
+        created
+      }
+    }
+  }
+`;
+
+export const UPDATE_GOAL = gql`
+  mutation updateGoal($goal_id: ID!) {
+    updateGoal(goal_id: $goal_id) {
+        _id
         title
-        link
+        description
+        friends
+        encouragement
+      }
+    }
+  }
+`;
+
+export const UPDATE_STEP = gql`
+  mutation updateStep($step_id: ID!) {
+    updateStep(step_id: $step_id) {
+        _id
+        title
+        status
+        due
+      }
+    }
+  }
+`;
+
+export const UPDATE_COMMENT = gql`
+  mutation updateComment($comment_id: ID!) {
+    updateComment(comment_id: $comment_id) {
+        description
+        user
+        created
       }
     }
   }
