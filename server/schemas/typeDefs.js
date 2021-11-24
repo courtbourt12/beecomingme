@@ -2,19 +2,18 @@ const { gql } = require("apollo-server-express");
 
 const typeDefs = gql`
   type User {
-    _id: ID
-    username: String
-    email: String
-    first_name: String
-    last_name: String
-    dob: DateTime
-    password: String
+    _id: ID!
+    username: String!
+    email: String!
+    first_name: String!
+    last_name: String!
+    dob: DateTime!
     goals: [Goal]
   }
 
   type Goal {
-    _id: ID
-    title: String
+    _id: ID!
+    title: String!
     description: String
     steps: [Step]
     friends: Array
@@ -22,17 +21,17 @@ const typeDefs = gql`
   }
 
   type Step {
-    _id: ID
-    title: String
+    _id: ID!
+    title: String!
     description: String
-    status: Int
+    status: Int!
     comments: [Comment]
-    due: DateTime
+    due: DateTime!
   }
 
   type Comment {
-    _id: ID
-    description: String
+    _id: ID!
+    description: String!
     user: String
     created: DateTime
   }
@@ -58,27 +57,38 @@ const typeDefs = gql`
     last_name: String
     dob: DateTime
     password: String
+    goals: [Goal]
   }
 
   input addGoalInput {
     title: String
     description: String
+    steps: [Step]
+    friends: Array
+    encouragement: Int
   }
 
   input addStepInput {
     title: String
     description: String
     status: Int
+    comments: [Comment]
     due: DateTime
+  }
+
+  input addCommentInput {
+    description: String
+    user: String
+    created: DateTime
   }
 
   type Mutation {
     login(email: String!, password: String!): Auth
 
-    addUser(input: addUser!): Auth
-    addGoal(input: addGoal!): User
-    addStep(input: addStep!): Goal
-    addComment(description: String!): Step
+    addUser(inputUser: addUserInput!): Auth
+    addGoal(inputGoal: addGoalInput!): User
+    addStep(inputStep: addStepInput!): Goal
+    addComment(inputComment: addCommentInput!): Step
 
     removeFriends(goal_id: ID!, user_id: ID!): User
     removeGoal(goal_id: ID!): User
