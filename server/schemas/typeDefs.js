@@ -17,7 +17,7 @@ const typeDefs = gql`
     title: String
     description: String
     steps: [Step]
-    friends: [User]
+    friends: Array
     encouragement: Int
   }
 
@@ -36,6 +36,7 @@ const typeDefs = gql`
     user: String
     created: DateTime
   }
+
   type Auth {
     token: ID!
     user: User
