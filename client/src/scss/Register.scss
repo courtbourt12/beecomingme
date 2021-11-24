@@ -1,0 +1,39 @@
+@import "../App.scss";
+@import "../assets/img/honeycomb.png";
+
+
+form {
+    font-family: $secondaryFont;
+    padding: 1.5rem 0;
+    font-size: 1.8rem;
+    width: 70vw;
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    background: url("../assets/img/honeycomb.png") center top;
+    background-size: cover;
+  
+    input {
+      margin: 2px 0px;
+      width: 50vw;
+      height: 10vh;
+    }
+  
+    button {
+      width: 15vw;
+      height: 5vh;
+      color: white;
+      background-color: crimson;
+      border: none;
+      border-radius: 10px;
+      font-weight: 500;
+      cursor: pointer;
+  
+      &:focus {
+        outline: 5px gold;
+      }
+    }
+  }
+  
