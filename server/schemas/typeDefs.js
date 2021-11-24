@@ -36,6 +36,7 @@ const typeDefs = gql`
     user: String
     created: DateTime
   }
+
   type Auth {
     token: ID!
     user: User
