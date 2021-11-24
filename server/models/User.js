@@ -25,7 +25,7 @@ const userSchema = new Schema({
     required: true,
   },
   dob: {
-    type: Date,
+    type: DateTime,
     required: true,
   },
   password: {
