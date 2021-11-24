@@ -13,36 +13,34 @@ export const LOGIN_USER = gql`
 `;
 
 export const ADD_USER = gql`
-  mutation addUser($username: String!, $email: String!, $password: String!) {
-    addUser(username: $username, email: $email, password: $password) {
-      token
-      user {
-        _id
+  mutation addUser($inputUser: addUserInput!) {
+    addUser(addUser: $inputUser) {
         username
-      }
+        email
+        first_name
+        last_name
+        dob
     }
   }
 `;
-//input is too generic, change to a more specific name
-//in typeDefs, change line 79 addGoal! to addGoalInput!
+
 export const ADD_GOAL = gql`
-  mutation addGoal($title: String!, $description: String!, $friends: Array!, $encouragement: Int!) {
-    addGoal(title: $title, description: $description, friends: $friends, encouragement: $encouragement) {
+  mutation addGoal($inputGoal: addGoalInput!) {
+    addGoal(addGoal: $inputGoal) {
         _id
         title
         description
-        friends
-        encouragement
       }
     }
   }
 `;
 
 export const ADD_STEP = gql`
-  mutation addStep($title: String!, $description: String!, $status: Int!, $due: DateTime!) {
-    addStep(title: $title, description: $description, status: $status, due: $due) {
+  mutation addStep($inputStep: addStepInput!) {
+    addStep(addStep: $inputStep) {
         _id
         title
+        description
         status
         due
       }
@@ -51,22 +49,12 @@ export const ADD_STEP = gql`
 `;
 
 export const ADD_COMMENT = gql`
-  mutation addComment($description: String!, $user: String!, $created: DateTime!) {
-    addComment(description: $description, user: $user, created: $created) {
+  mutation addComment($inputComment: addCommentInput!) {
+    addComment(addComment: $inputComment) {
+        _id
         description
         user
         created
-      }
-    }
-  }
-`;
-
-export const REMOVE_FRIEND = gql`
-  mutation removeFriend($goal_id: ID!, $user_id: ID!) {
-    removeFriend(goal_id: $goal_id, user_id: $user_id) {
-        _id
-        username
-        email
       }
     }
   }
@@ -78,6 +66,14 @@ export const REMOVE_GOAL = gql`
         _id
         username
         email
+        goals {
+            _id
+            title
+            description
+            steps
+            friends
+            encouragement
+        }
       }
     }
   }
@@ -89,6 +85,14 @@ export const REMOVE_STEP = gql`
         _id
         username
         email
+        steps {
+            _id
+            title
+            description
+            status
+            comments
+            due
+        }
       }
     }
   }
@@ -100,6 +104,26 @@ export const REMOVE_COMMENT = gql`
         _id
         username
         email
+        comments {
+            _id
+            description
+            user
+            created
+        }
+      }
+    }
+  }
+`;
+
+export const REMOVE_FRIEND = gql`
+  mutation updateUser($user_id: ID!) {
+    updateUser(user_id: $user_id) {
+        _id
+        username
+        goals {
+            friends
+        }
+
       }
     }
   }
