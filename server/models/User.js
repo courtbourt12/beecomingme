@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+import goalSchema from "./Goal";
 
 const Schema = mongoose.Schema,
   bcrypt = require(bcrypt),
@@ -32,16 +33,7 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
-  // goals: [{
-  //   type: Schema.Types.ObjectId,
-  //   ref: 'Goal',
-  // }],
-  goals: {
-    type: Array,
-  },
-  friends: {
-    type: Array,
-  },
+  goals: [goalSchema],
 });
 
 userSchema.pre(save, function (next) {
