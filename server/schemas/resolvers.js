@@ -1,5 +1,5 @@
 const { AuthenticationError } = require("apollo-server-express");
-const { User, Step, Goal, Comment } = require("../models");
+const { User } = require("../models/User.js");
 const { signToken } = require("../utils/auth");
 
 const resolvers = {
@@ -16,22 +16,54 @@ const resolvers = {
       throw new AuthenticationError("Not logged in");
     },
     friends: async (parent, { email }) => {
-      return User.findOne({ email });
+      return await User.findOne({ email });
     },
     goals: async (parent, { user_id }) => {
-      return User.find({ _id: user_id });
+      const goalsArray = await User.find({ _id: user_id });
+      return goalsArray.goals;
     },
-    goal: async (parent, { goal_id }) => {
-      return Goal.findOne({ _id: goal_id });
+    goal: async (parent, { user_id, goal_id }) => {
+      const userArray = await User.find({ _id: user_id });
+      const goalsArray = userArray.goals;
+      goalsArray.forEach((element) => {
+        if (element._id === goal_id) {
+          return element;
+        } else {
+          return "No Goal Found";
+        }
+      });
     },
-    steps: async (parent, { goal_id }) => {
-      return Step.find({ _id: goal_id });
+    steps: async (parent, {user_id, goal_id }) => {
+      const userArray = await User.find({ _id: user_id });
+      const goalsArray = userArray.goals;
+      goalsArray.forEach((element) => {
+        if (element._id === goal_id) {
+          return element.steps;
+        } else {
+          return "No Steps Found";
+        }
+      });
     },
-    comments: async (parent, { step_id }) => {
-      return Step.find({ _id: step_id });
+    comments: async (parent, { user_id, goal_id, step_id }) => {
+      const userArray = await User.find({ _id: user_id });
+      const goalsArray = userArray.goals;
+      goalsArray.forEach((goalEl) => {
+        if (goalEl._id === goal_id) {
+          const stepsArray = goalEl.steps;
+          stepsArray.forEach((stepEl) => {
+            if (stepEl._id === step_id) {
+              return stepEl.comments;
+            } else {
+              return "No Comments Found";
+            }
+          })
+        } else {
+          return "No Steps Found";
+        }
+      });
     },
   },
-  Mutations: {
+  Mutation: {
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
 
@@ -46,6 +78,7 @@ const resolvers = {
       }
 
       const token = signToken(user);
+      console.log("resolvers.js login mutation triggered")
       return { token, user };
     },
     // Add new User
@@ -77,21 +110,9 @@ const resolvers = {
         { new: true }
       );
     },
-    // Remove Friends from goal
-    removeFriends: async (parent, { goal_id, user_id }) => {
-      return Step.findOneAndUpdate(
-        { _id: goal_id },
-        { $pull: { friends: { _id: user_id } } },
-        { new: true }
-      );
-    },
     // Remove goal
     removeGoal: async (parent, { goal_id }) => {
       return Goal.findOneAndDelete({ _id: goal_id });
-    },
-    // Remove step
-    removeStep: async (parent, { step_id }) => {
-      return Step.findOneAndDelete({ _id: step_id });
     },
     // Update User information
     updateUser: async (parent, { user, body }) => {
