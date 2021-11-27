@@ -1,15 +1,13 @@
-const mongoose = require("mongoose");
-import goalSchema from "./Goal";
-
-const Schema = mongoose.Schema,
-  bcrypt = require(bcrypt),
-  SALT_WORK_FACTOR = 10;
+const { Schema, model } = require('mongoose');
+const goalSchema = require("./Goal.js");
+const bcrypt = require("bcrypt");
 
 const userSchema = new Schema({
   username: {
     type: String,
     trim: true,
     required: "Enter a username",
+    unique: true,
   },
   email: {
     type: String,
@@ -26,7 +24,7 @@ const userSchema = new Schema({
     required: true,
   },
   dob: {
-    type: DateTime,
+    type: Date,
     required: true,
   },
   password: {
@@ -36,14 +34,14 @@ const userSchema = new Schema({
   goals: [goalSchema],
 });
 
-userSchema.pre(save, function (next) {
+userSchema.pre("save", function (next) {
   var user = this;
 
   // only hash the password if it has been modified (or is new)
   if (!user.isModified("password")) return next();
 
   // generate a salt
-  bcrypt.genSalt(SALT_WORK_FACTOR, function (err, salt) {
+  bcrypt.genSalt(10, function (err, salt) {
     if (err) return next(err);
 
     // hash the password using our new salt
@@ -64,6 +62,6 @@ userSchema.methods.comparePassword = function (candidatePassword, cb) {
   });
 };
 
-const User = mongoose.model("User", userSchema);
+const User = model("User", userSchema);
 
 module.exports = User;

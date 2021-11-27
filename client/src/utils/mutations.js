@@ -32,7 +32,6 @@ export const ADD_GOAL = gql`
         description
       }
     }
-  }
 `;
 
 export const ADD_STEP = gql`
@@ -45,7 +44,6 @@ export const ADD_STEP = gql`
         due
       }
     }
-  }
 `;
 
 export const ADD_COMMENT = gql`
@@ -57,7 +55,6 @@ export const ADD_COMMENT = gql`
         created
       }
     }
-  }
 `;
 
 export const REMOVE_GOAL = gql`
@@ -76,7 +73,6 @@ export const REMOVE_GOAL = gql`
         }
       }
     }
-  }
 `;
 
 export const REMOVE_STEP = gql`
@@ -95,7 +91,6 @@ export const REMOVE_STEP = gql`
         }
       }
     }
-  }
 `;
 
 export const REMOVE_COMMENT = gql`
@@ -112,7 +107,6 @@ export const REMOVE_COMMENT = gql`
         }
       }
     }
-  }
 `;
 
 export const REMOVE_FRIEND = gql`
@@ -126,7 +120,6 @@ export const REMOVE_FRIEND = gql`
 
       }
     }
-  }
 `;
 
 export const UPDATE_USER = gql`
@@ -137,7 +130,6 @@ export const UPDATE_USER = gql`
         created
       }
     }
-  }
 `;
 
 export const UPDATE_GOAL = gql`
@@ -150,7 +142,6 @@ export const UPDATE_GOAL = gql`
         encouragement
       }
     }
-  }
 `;
 
 export const UPDATE_STEP = gql`
@@ -162,7 +153,6 @@ export const UPDATE_STEP = gql`
         due
       }
     }
-  }
 `;
 
 export const UPDATE_COMMENT = gql`
@@ -173,5 +163,4 @@ export const UPDATE_COMMENT = gql`
         created
       }
     }
-  }
 `;

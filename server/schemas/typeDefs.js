@@ -7,7 +7,7 @@ const typeDefs = gql`
     email: String!
     first_name: String!
     last_name: String!
-    dob: DateTime!
+    dob: String!
     goals: [Goal]
   }
 
@@ -16,7 +16,7 @@ const typeDefs = gql`
     title: String!
     description: String
     steps: [Step]
-    friends: Array
+    friends: [User]
     encouragement: Int
   }
 
@@ -26,14 +26,14 @@ const typeDefs = gql`
     description: String
     status: Int!
     comments: [Comment]
-    due: DateTime!
+    due: String!
   }
 
   type Comment {
     _id: ID!
     description: String!
     user: String
-    created: DateTime
+    created: String!
   }
 
   type Auth {
@@ -42,8 +42,8 @@ const typeDefs = gql`
   }
 
   type Query {
-    friends: [User]
     user(user_id: ID!): User
+    friends(email: String!): User
     goals(user_id: ID!): [Goal]
     goal(goal_id: ID!): Goal
     steps(goal_id: ID!): [Step]
@@ -55,31 +55,26 @@ const typeDefs = gql`
     email: String
     first_name: String
     last_name: String
-    dob: DateTime
+    dob: String
     password: String
-    goals: [Goal]
   }
 
   input addGoalInput {
     title: String
     description: String
-    steps: [Step]
-    friends: Array
-    encouragement: Int
   }
 
   input addStepInput {
     title: String
     description: String
     status: Int
-    comments: [Comment]
-    due: DateTime
+    due: String
   }
 
   input addCommentInput {
     description: String
     user: String
-    created: DateTime
+    created: String
   }
 
   type Mutation {
@@ -90,9 +85,7 @@ const typeDefs = gql`
     addStep(inputStep: addStepInput!): Goal
     addComment(inputComment: addCommentInput!): Step
 
-    removeFriends(goal_id: ID!, user_id: ID!): User
     removeGoal(goal_id: ID!): User
-    removeStep(step_id: ID!): Goal
     removeComment(step_id: ID!, comment_id: ID!): Step
 
     updateUser(user_id: ID!): User

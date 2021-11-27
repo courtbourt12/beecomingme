@@ -1,5 +1,5 @@
 const { Schema } = require("mongoose");
-import commentSchema from "./Comment";
+const commentSchema = require("./Comment");
 
 const stepSchema = new Schema({
   title: {

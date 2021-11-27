@@ -1,5 +1,5 @@
 const { Schema } = require("mongoose");
-import stepSchema from "./Step";
+const stepSchema = require("./Step.js");
 
 const goalSchema = new Schema(
   {
