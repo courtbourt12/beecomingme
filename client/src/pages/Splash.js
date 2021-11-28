@@ -73,10 +73,10 @@ export default function Splash() {
             </Card>
           </div>
         </section>
+        <footer>
+          copyright
+        </footer>
       </main>
-      <footer>
-        copyright
-      </footer>
     </div>
   );
 }

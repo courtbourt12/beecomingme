@@ -1,9 +1,15 @@
-import React from "react";
+import { React, useState } from "react";
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 
-export default function AddGoalForm() {
+export default function AddStepForm() {
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   return (
     <div>
-      <button className="addStepButton" placeholder="Add Step">
+      <Button variant="outline-dark" onClick={handleShow}>+</Button>
+      <Modal show={show} onHide={handleClose}>
         <form className="addStepForm">
           <input
             name="addStepTitle"
@@ -17,8 +23,9 @@ export default function AddGoalForm() {
             placeholder="Description*"
             type="text"
           />
+          <Button variant="outline-dark" onClick={handleClose}>X</Button>
           <br />
-          <label for="dueDate">Due Date</label>
+          <label name="dueDate">Due Date</label>
           <input name="dueDate" id="dueDate" type="date" />
           <br />
           <select>
@@ -27,9 +34,9 @@ export default function AddGoalForm() {
             <option value="3">Complete</option>
           </select>
           <br />
-          <input type="submit" value="Add Step" />
+          <Button className = "addStep" variant="outline-dark" onClick={handleClose}>Add Step</Button>
         </form>
-      </button>
+      </Modal>
     </div>
   );
 }

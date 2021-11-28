@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.scss"
-import Splash from "./pages/Splash";
+import MyGoalDisplay from "./pages/MyGoalDisplay";
 import {
   ApolloClient,
   InMemoryCache,
@@ -37,7 +37,7 @@ const client = new ApolloClient({
 const App = () => (
   <ApolloProvider client={client}>
     <div>
-      <Splash />
+      <MyGoalDisplay />
     </div>
   </ApolloProvider>
 );
