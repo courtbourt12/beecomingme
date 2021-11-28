@@ -35,8 +35,7 @@ export default function Splash() {
         <section className="home">
           <h1 className="home">Welcome to the hive</h1>
           <div className="carousel">
-            <h1>Rotating Motivational message</h1>
-            <p>{data}</p>
+            <h1>{data}</h1>
           </div>
           <div className="heading">
             <p>Did someone invite you to be their accountability partner?</p>
@@ -47,7 +46,6 @@ export default function Splash() {
             <a href="#register">Register</a>
             <br />
             <a href="#login">Login</a>
-            <p>Inspirational quotes provided by <a href="https://zenquotes.io/" target="_blank">ZenQuotes API</a></p>
           </footer>
         </section>
       </main>
