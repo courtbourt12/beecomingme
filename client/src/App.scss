@@ -1,10 +1,10 @@
-@import "./globalReset.scss";
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Indie+Flower&display=swap');
+// @import "./globalReset.scss";
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script&family=Indie+Flower&display=swap");
 
 $width: 768px;
 
-$primaryFont: 'Dancing Script', cursive;
-$secondaryFont: 'Indie Flower', cursive;
+$primaryFont: "Dancing Script", cursive;
+$secondaryFont: "Indie Flower", cursive;
 
 @mixin mobile {
   @media (max-width: #{$width}) {

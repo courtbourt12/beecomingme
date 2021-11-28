@@ -1,6 +1,8 @@
 import React from "react";
-import "./App.scss"
-import Login from "./pages/Login";
+import "./App.scss";
+// import Login from "./pages/Login";
+import Profile from "./pages/MyGoalDisplay";
+
 import {
   ApolloClient,
   InMemoryCache,
@@ -11,18 +13,18 @@ import { setContext } from "@apollo/client/link/context";
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
-  uri: '/graphql',
+  uri: "/graphql",
 });
 
 // Construct request middleware that will attach the JWT token to every request as an `authorization` header
 const authLink = setContext((_, { headers }) => {
   // get the authentication token from local storage if it exists
-  const token = localStorage.getItem('id_token');
+  const token = localStorage.getItem("id_token");
   // return the headers to the context so httpLink can read them
   return {
     headers: {
       ...headers,
-      authorization: token ? `Bearer ${token}` : '',
+      authorization: token ? `Bearer ${token}` : "",
     },
   };
 });
@@ -36,7 +38,7 @@ const client = new ApolloClient({
 const App = () => (
   <ApolloProvider client={client}>
     <div>
-      <Login />
+      <Profile />
     </div>
   </ApolloProvider>
 );
