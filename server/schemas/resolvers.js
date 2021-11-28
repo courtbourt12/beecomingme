@@ -28,19 +28,32 @@ const resolvers = {
       goalsArray.forEach((element) => {
         if (element._id === goal_id) {
           return element;
-        } else {
-          return "No Goal Found";
         }
       });
     },
-    steps: async (parent, {user_id, goal_id }) => {
+    friendGoals: async (parent, { user_id }) => {
+      const allUsers = await User.find({});
+      const allGoals = allUsers
+        .map((user) => user.goals)
+        .flat()
+        .filter((goal) => goal.friends.includes(user_id));
+
+      return allGoals;
+    },
+    steps: async (parent, { user_id, goal_id }) => {
       const userArray = await User.find({ _id: user_id });
       const goalsArray = userArray.goals;
       goalsArray.forEach((element) => {
         if (element._id === goal_id) {
-          return element.steps;
-        } else {
-          return "No Steps Found";
+          const stepsArray = element.steps;
+          const intArray = stepsArray.sort(function (a, b) {
+            var keyA = new Date(a.due),
+              keyB = new Date(b.due);
+            if (keyA < keyB) return -1;
+            if (keyA > keyB) return 1;
+            return 0;
+          });
+          return intArray;
         }
       });
     },
@@ -56,7 +69,7 @@ const resolvers = {
             } else {
               return "No Comments Found";
             }
-          })
+          });
         } else {
           return "No Steps Found";
         }
@@ -78,7 +91,7 @@ const resolvers = {
       }
 
       const token = signToken(user);
-      console.log("resolvers.js login mutation triggered")
+      console.log("resolvers.js login mutation triggered");
       return { token, user };
     },
     // Add new User

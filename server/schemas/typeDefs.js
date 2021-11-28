@@ -46,6 +46,7 @@ const typeDefs = gql`
     friends(email: String!): User
     goals(user_id: ID!): [Goal]
     goal(goal_id: ID!): Goal
+    friendGoals(user_id: ID!): [Goal]
     steps(goal_id: ID!): [Step]
     comments(step_id: ID!): [Comment]
   }
