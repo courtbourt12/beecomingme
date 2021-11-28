@@ -1,5 +1,6 @@
 import React from "react";
 import AddGoalForm from "../components/AddGoalForm";
+import Card from 'react-bootstrap/Card';
 
 export default function Profile() {
   return (
@@ -8,10 +9,15 @@ export default function Profile() {
       <h2 className="username">Displays Username</h2>
       <AddGoalForm />
       <h2>Goals:</h2>
-      <div className="goalContainer">
-        <h3 className="goalTitle">Title of Goal</h3>
-        <p className="goalDescription">Goal Description</p>
-      </div>
+      <Card>
+        <Card.Header>Username of goal owner</Card.Header>
+        <Card.Body>
+          <Card.Title>Title of Goal</Card.Title>
+          <Card.Text>
+          Goal Description
+          </Card.Text>
+        </Card.Body>
+      </Card>
     </div>
   );
 }

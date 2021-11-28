@@ -1,8 +1,13 @@
 import React from "react";
 import AddStepForm from "../components/AddStepForm";
 import AddFriendForm from "../components/AddFriendForm";
+import Card from 'react-bootstrap/Card';
+import Accordion from 'react-bootstrap/Accordion';
+import Button from 'react-bootstrap/Button';
+import ListGroup from 'react-bootstrap/ListGroup';
 
-export default function MyGoalDisplay() {
+  
+  export default function MyGoalDisplay() {
   return (
     <div>
       <h1>Goal</h1>
@@ -17,16 +22,40 @@ export default function MyGoalDisplay() {
           </ul>
         </div>
         <div className="stepsContainer">
-          <h3>Steps: + -</h3>
+        <h3>Steps</h3>
+       
           <AddStepForm />
-
-          <ul>
-            <h4 className="stepTitle">Step Title -</h4>
-            <p className="stepDescription">Step Description</p>
-            <h4>Comments: -</h4>
-            <span className="commentUsername">Username: </span>
-            <span className="commentBody">Comment</span>
-          </ul>
+        <ul>
+          <Card className="text-center">
+            <Card.Header>Step Title</Card.Header>
+            <Card.Body>
+              <Card.Title>Due Date</Card.Title>
+              <Card.Text>
+                Step Description
+              </Card.Text>
+              <Button variant="primary">Not Started</Button>
+              <Button variant="warning">In Progress</Button>
+              <Button variant="success">Complete</Button>
+            </Card.Body>
+            <Card.Footer className="text-muted">
+            <Accordion defaultActiveKey="0" flush>
+              <Accordion.Item eventKey="0">
+                <Accordion.Header>Comments</Accordion.Header>
+                <Accordion.Body>
+                <Card style={{ width: '18rem' }}>
+              <ListGroup variant="flush">
+                <ListGroup.Item>
+                  <span className="commentUsername">Username: </span>
+                  <span className="commentBody">Comment</span>
+                </ListGroup.Item>
+              </ListGroup>
+            </Card>
+                </Accordion.Body>
+              </Accordion.Item>
+            </Accordion>
+            </Card.Footer>
+          </Card>
+        </ul>
         </div>
       </div>
     </div>
