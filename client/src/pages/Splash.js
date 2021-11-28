@@ -39,16 +39,34 @@ export default function Splash() {
           </div>
           <div className="heading">
             <p>Did someone invite you to be their accountability partner?</p>
-            <p>Register for an account here to help them out</p>
+            <p>Sign up for an account here to help them out</p>
           </div>
           <footer>
             <p>Beecome one of us!</p>
-            <a href="#register">Register</a>
+            <a href="#signUp">Sign Up</a>
             <br />
             <a href="#login">Login</a>
           </footer>
         </section>
       </main>
+      <div>
+        <h1>Goal</h1>
+        <div className="goalContainer">
+          <h3 className="goalTitle">Title of Goal</h3>
+          <p className="goalDescription">Goal Description</p>
+          <ul className="stepsContainer">
+            <h3>Steps:</h3>
+            <ul>
+              <h4 className="stepTitle">Step Title</h4>
+              <p className="stepDescription">Step Description</p>
+              <h4>Comment:</h4>
+              <span className="commentUsername">Username: </span>
+              <span className="commentBody">Comment</span>
+            </ul>
+          </ul>
+        </div>
+      </div>
     </div>
   );
 }
+
