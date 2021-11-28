@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.scss"
-import Login from "./pages/Login";
+import Splash from "./pages/Splash";
 import {
   ApolloClient,
   InMemoryCache,
@@ -36,7 +36,7 @@ const client = new ApolloClient({
 const App = () => (
   <ApolloProvider client={client}>
     <div>
-      <Login />
+      <Splash />
     </div>
   </ApolloProvider>
 );
