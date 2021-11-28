@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
 
 export default function Splash() {
   const [data, setData] = useState(null);
@@ -34,38 +36,47 @@ export default function Splash() {
       <main>
         <section className="home">
           <h1 className="home">Welcome to the hive</h1>
-          <div className="carousel">
-            <h1>{data}</h1>
-          </div>
+          <Card>
+            <Card.Header>Inspirational Quote</Card.Header>
+            <Card.Body>
+              <blockquote className="blockquote mb-0">
+                <p>
+                  {data}
+                </p>
+              </blockquote>
+            </Card.Body>
+          </Card>
           <div className="heading">
             <p>Did someone invite you to be their accountability partner?</p>
             <p>Sign up for an account here to help them out</p>
           </div>
-          <footer>
+          <div>
             <p>Beecome one of us!</p>
-            <a href="#signUp">Sign Up</a>
+            <Button variant="primary" size="lg" active>
+            Sign Up
+            </Button>
             <br />
-            <a href="#login">Login</a>
-          </footer>
+            <Button variant="primary" size="lg" active>
+            Login
+            </Button>
+          </div>
+          <div className = "hide">
+            <h1>Goal</h1>   
+            <Card>
+              <Card.Header>Username of goal owner</Card.Header>
+              <Card.Body>
+                <Card.Title>Title of Goal</Card.Title>
+                <Card.Text>
+                Goal Description
+                </Card.Text>
+              </Card.Body>
+            </Card>
+          </div>
         </section>
       </main>
-      <div>
-        <h1>Goal</h1>
-        <div className="goalContainer">
-          <h3 className="goalTitle">Title of Goal</h3>
-          <p className="goalDescription">Goal Description</p>
-          <ul className="stepsContainer">
-            <h3>Steps:</h3>
-            <ul>
-              <h4 className="stepTitle">Step Title</h4>
-              <p className="stepDescription">Step Description</p>
-              <h4>Comment:</h4>
-              <span className="commentUsername">Username: </span>
-              <span className="commentBody">Comment</span>
-            </ul>
-          </ul>
-        </div>
-      </div>
+      <footer>
+        copyright
+      </footer>
     </div>
   );
 }
