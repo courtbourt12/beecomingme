@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
@@ -62,6 +63,7 @@ export default function SignUp() {
             <Button
               variant="outline-dark"
               onClick={handleClose}
+              as={Link} to="/mygoals"
             >
               Sign Up
             </Button>

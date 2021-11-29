@@ -55,16 +55,6 @@ export default function Splash() {
             <SignUp />
             <Login />
           </div>
-          <div className="hide">
-            <h1>Goal</h1>
-            <Card className="homeCard">
-              <Card.Header>Username of goal owner</Card.Header>
-              <Card.Body>
-                <Card.Title>Title of Goal</Card.Title>
-                <Card.Text>Goal Description</Card.Text>
-              </Card.Body>
-            </Card>
-          </div>
         </section>
         <footer>copyright</footer>
       </main>

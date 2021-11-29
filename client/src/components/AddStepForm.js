@@ -3,10 +3,39 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import "../scss/MyGoalDisplay.scss";
 
+const newStep = [];
+
 export default function AddStepForm() {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const [ inputTitle, setInputTitle] = useState('');
+  const [ inputDescription, setInputDescription] = useState('');
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const newT = inputTitle
+    const newD = inputDescription
+    newStep.push({title: newT,
+                  description: newD})
+    console.log(inputTitle, inputDescription)
+    console.log(newStep)
+  
+    setInputTitle('');
+    setInputDescription('');
+    handleClose();
+  };
+  
+  
+  const handleTitleChange = (e) => {
+    setInputTitle(e.target.value);
+  };
+  
+  const handleDescriptionChange = (e) => {
+    setInputDescription(e.target.value)
+  };
+
   return (
     <div>
       <svg
@@ -34,14 +63,18 @@ export default function AddStepForm() {
           <input
             name="addStepTitle"
             id="addStepTitle"
+            value= {inputTitle}
             placeholder="Title*"
             type="text"
+            onChange= {handleTitleChange}
           />
           <input
             name="addStepDescription"
             id="addStepDescription"
+            value= {inputDescription}
             placeholder="Description*"
             type="text"
+            onChange= {handleDescriptionChange}
           />
           <br />
           <label name="dueDate">Due Date</label>
@@ -60,7 +93,7 @@ export default function AddStepForm() {
             <Button
               className="addStep"
               variant="outline-dark"
-              onClick={handleClose}
+              onClick={handleSubmit}
             >
               Add Step
             </Button>
