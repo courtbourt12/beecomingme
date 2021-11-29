@@ -4,6 +4,9 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Navbar from "./components/Navbar";
 import MyProfile from "./pages/MyProfile";
 import Splash from "./pages/Splash";
+import FriendGoals from "./pages/FriendGoals";
+import GoalDisplay from "./pages/GoalDisplay";
+import MyGoalDisplay from "./pages/MyGoalDisplay";
 import {
   ApolloClient,
   InMemoryCache,
@@ -44,7 +47,10 @@ const App = () => (
       <Navbar />
       <Switch>
         <Route exact path="/" component={Splash} />
+        <Route exact path="/friendgoals" component={FriendGoals} />
+        <Route exact path="/goaldisplay" component={GoalDisplay} />
         <Route exact path="/mygoals" component={MyProfile} />
+        <Route exact path="/mygoaldisplay" component={MyGoalDisplay} />
         <Route render={() => <h1 className="display-2">Wrong page!</h1>} />
       </Switch>
     </>

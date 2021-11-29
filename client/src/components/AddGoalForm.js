@@ -5,6 +5,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 // import { useHistory } from 'react-router-dom';
 // import { ADD_GOAL } from '../utils/mutations';
+const newGoal = [];
 
 export default function AddGoalForm() {
 
@@ -20,10 +21,15 @@ const [ inputTitle, setInputTitle] = useState('');
 const [ inputDescription, setInputDescription] = useState('');
 
 // const [addGoal, { error }] = useMutation(ADD_GOAL) 
-const newGoal = [];
 
 const handleSubmit = (event) => {
   event.preventDefault();
+  const newT = inputTitle
+  const newD = inputDescription
+  newGoal.push({title: newT,
+                description: newD})
+  console.log(inputTitle, inputDescription)
+  console.log(newGoal)
 
   // props.onSubmit({
   //   title: inputTitle,
@@ -33,18 +39,15 @@ const handleSubmit = (event) => {
   setInputTitle('');
   setInputDescription('');
   handleClose();
-  console.log(newGoal)
 };
 
 
 const handleTitleChange = (e) => {
-  const newTitle = setInputTitle(e.target.value);
-  newGoal.push(newTitle)
+  setInputTitle(e.target.value);
 };
 
 const handleDescriptionChange = (e) => {
-  const newDescription = setInputDescription(e.target.value);
-  newGoal.push(newDescription)
+  setInputDescription(e.target.value)
 };
 
   return (

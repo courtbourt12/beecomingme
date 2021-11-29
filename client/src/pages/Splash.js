@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
-import Button from "react-bootstrap/Button";
+// import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import "../scss/Splash.scss";
+import SignUp from "./SignUp"
+import Login from "./Login"
+
 
 export default function Splash() {
   const [data, setData] = useState(null);
@@ -49,22 +52,8 @@ export default function Splash() {
             <p>Beecome one of us!</p>
           </div>
           <div className="buttonDiv">
-            <Button variant="primary" size="lg" active>
-              Sign Up
-            </Button>
-            <Button variant="primary" size="lg" active>
-              Login
-            </Button>
-          </div>
-          <div className="hide">
-            <h1>Goal</h1>
-            <Card className="homeCard">
-              <Card.Header>Username of goal owner</Card.Header>
-              <Card.Body>
-                <Card.Title>Title of Goal</Card.Title>
-                <Card.Text>Goal Description</Card.Text>
-              </Card.Body>
-            </Card>
+            <SignUp />
+            <Login />
           </div>
         </section>
         <footer>copyright</footer>
