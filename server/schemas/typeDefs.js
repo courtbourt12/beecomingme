@@ -2,12 +2,13 @@ const { gql } = require("apollo-server-express");
 
 const typeDefs = gql`
   type User {
-    _id: ID!
-    username: String!
-    email: String!
-    first_name: String!
-    last_name: String!
-    dob: String!
+    _id: ID
+    username: String
+    email: String
+    first_name: String
+    last_name: String
+    dob: String
+    password: String
     goals: [Goal]
   }
 
@@ -46,7 +47,7 @@ const typeDefs = gql`
     friends(email: String!): User
     goals(user_id: ID!): [Goal]
     goal(goal_id: ID!): Goal
-    friendGoals(user_id: ID!): [Goal]
+    friendGoals(username: String!): [Goal]
     steps(goal_id: ID!): [Step]
     comments(step_id: ID!): [Comment]
   }

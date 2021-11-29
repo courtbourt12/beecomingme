@@ -64,4 +64,4 @@ userSchema.methods.comparePassword = function (candidatePassword, cb) {
 
 const User = model("User", userSchema);
 
-module.exports = User;
+module.exports = {User};

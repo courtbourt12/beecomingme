@@ -1,26 +1,26 @@
 const { AuthenticationError } = require("apollo-server-express");
-const { User } = require("../models/User.js");
-const { signToken } = require("../utils/auth");
+const { User } = require("../models/User");
+// const { signToken } = require("../utils/auth");
 
 const resolvers = {
   Query: {
-    user: async (parent, args, context) => {
-      if (context.user) {
-        const userData = await User.findOne({ _id: context.user._id }).select(
+    user: async (parent, {user_id}) => {
+      if (user_id) {
+        const userData = await User.findOne({ _id: user_id }).select(
           "-__v -password"
         );
 
         return userData;
       }
 
-      throw new AuthenticationError("Not logged in");
+      // throw new AuthenticationError("Not logged in");
     },
     friends: async (parent, { email }) => {
       return await User.findOne({ email });
     },
     goals: async (parent, { user_id }) => {
       const goalsArray = await User.find({ _id: user_id });
-      return goalsArray.goals;
+      return goalsArray[0].goals;
     },
     goal: async (parent, { user_id, goal_id }) => {
       const userArray = await User.find({ _id: user_id });
@@ -31,13 +31,17 @@ const resolvers = {
         }
       });
     },
-    friendGoals: async (parent, { user_id }) => {
+    friendGoals: async (parent, { username }) => {
       const allUsers = await User.find({});
+      console.log("allUsers ", allUsers);
       const allGoals = allUsers
-        .map((user) => user.goals)
+        .map((user) => {
+          console.log("user.goals ",user.goals)
+          return user.goals
+        })
         .flat()
-        .filter((goal) => goal.friends.includes(user_id));
-
+        .filter((goal) => goal.friends[0].includes(username));
+console.log("allGoals ",allGoals)
       return allGoals;
     },
     steps: async (parent, { user_id, goal_id }) => {
