@@ -1,4 +1,4 @@
-// @import "./globalReset.scss";
+@import "./globalReset.scss";
 @import url("https://fonts.googleapis.com/css2?family=Dancing+Script&family=Indie+Flower&display=swap");
 
 $width: 768px;
@@ -18,7 +18,7 @@ $secondaryFont: "Indie Flower", cursive;
     url("./assets/img/honeycomb.png") center top;
   background-size: cover;
   width: 100vw;
-  height: 100vh;
+  height: 100%;
 }
 
 @mixin mobile {
@@ -26,3 +26,4 @@ $secondaryFont: "Indie Flower", cursive;
     @content;
   }
 }
+
