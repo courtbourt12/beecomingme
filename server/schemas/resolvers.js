@@ -67,30 +67,25 @@ console.log("allGoals ",allGoals)
   Mutation: {
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
-
       if (!user) {
         throw new AuthenticationError("No User with this email found!");
       }
-
-      const correctPw = await user.comparePassword(password);
+      const correctPw = await user.isCorrectPassword(password);
 
       if (!correctPw) {
         throw new AuthenticationError("Incorrect password!");
       }
-
-      const token = signToken(user);
-      console.log("resolvers.js login mutation triggered");
-      return { token, user };
+      return user;
     },
     // Add new User
-    addUser: async (parent, body) => {
-      const user = await User.create(body);
-      const token = signToken(user);
-      return { token, user };
+    addUser: async (parent, {inputUser}) => {
+      const user = await User.create({...inputUser});
+      return user;
     },
     // Add new Goal
-    addGoal: async (parent, body) => {
-      const goal = await Goal.create(body);
+    addGoal: async (parent, { inputGoal }) => {
+      console.log("inputGoal", inputGoal)
+      const goal = await Goal.create({...inputGoal});
       return goal._id;
     },
     // Add new Step
