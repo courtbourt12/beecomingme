@@ -48,8 +48,7 @@ const typeDefs = gql`
     goals(user_id: ID!): [Goal]
     goal(goal_id: ID!): Goal
     friendGoals(username: String!): [Goal]
-    steps(goal_id: ID!): [Step]
-    comments(step_id: ID!): [Comment]
+    steps(user_id: ID!, goal_id: ID!): [Step]
   }
 
   input addUserInput {

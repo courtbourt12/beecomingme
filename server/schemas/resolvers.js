@@ -46,10 +46,11 @@ console.log("allGoals ",allGoals)
     },
     steps: async (parent, { user_id, goal_id }) => {
       const userArray = await User.find({ _id: user_id });
-      const goalsArray = userArray.goals;
-      goalsArray.forEach((element) => {
-        if (element._id === goal_id) {
-          const stepsArray = element.steps;
+      const goalsArray = userArray[0].goals;
+      let tempArray = []
+      goalsArray.forEach((Goal) => {
+        if (Goal._id == goal_id) {
+          const stepsArray = Goal.steps;
           const intArray = stepsArray.sort(function (a, b) {
             var keyA = new Date(a.due),
               keyB = new Date(b.due);
@@ -57,27 +58,10 @@ console.log("allGoals ",allGoals)
             if (keyA > keyB) return 1;
             return 0;
           });
-          return intArray;
+          tempArray = intArray
         }
       });
-    },
-    comments: async (parent, { user_id, goal_id, step_id }) => {
-      const userArray = await User.find({ _id: user_id });
-      const goalsArray = userArray.goals;
-      goalsArray.forEach((goalEl) => {
-        if (goalEl._id === goal_id) {
-          const stepsArray = goalEl.steps;
-          stepsArray.forEach((stepEl) => {
-            if (stepEl._id === step_id) {
-              return stepEl.comments;
-            } else {
-              return "No Comments Found";
-            }
-          });
-        } else {
-          return "No Steps Found";
-        }
-      });
+      return tempArray;
     },
   },
   Mutation: {
