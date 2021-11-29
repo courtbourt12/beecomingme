@@ -1,6 +1,9 @@
 import React from "react";
-import "./scss/MyGoalDisplay.scss";
-import MyGoalDisplay from "./pages/MyGoalDisplay";
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+// import "./scss/Navbar.scss";
+import Navbar from "./components/Navbar";
+import MyProfile from "./pages/MyProfile";
+import Splash from "./pages/Splash";
 import {
   ApolloClient,
   InMemoryCache,
@@ -36,10 +39,17 @@ const client = new ApolloClient({
 
 const App = () => (
   <ApolloProvider client={client}>
-    <div>
-      <MyGoalDisplay />
-    </div>
-  </ApolloProvider>
+  <Router>
+    <>
+      <Navbar />
+      <Switch>
+        <Route exact path="/" component={Splash} />
+        <Route exact path="/mygoals" component={MyProfile} />
+        <Route render={() => <h1 className="display-2">Wrong page!</h1>} />
+      </Switch>
+    </>
+  </Router>
+</ApolloProvider>
 );
 
 export default App;
