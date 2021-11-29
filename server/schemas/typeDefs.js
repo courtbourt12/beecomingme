@@ -46,7 +46,7 @@ const typeDefs = gql`
     user(user_id: ID!): User
     friends(email: String!): User
     goals(user_id: ID!): [Goal]
-    goal(goal_id: ID!): Goal
+    goal(user_id: ID!, goal_id: ID!): Goal
     friendGoals(username: String!): [Goal]
     steps(user_id: ID!, goal_id: ID!): [Step]
   }
@@ -79,9 +79,9 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    login(email: String!, password: String!): Auth
+    login(email: String!, password: String!): User
 
-    addUser(inputUser: addUserInput!): Auth
+    addUser(inputUser: addUserInput!): User
     addGoal(inputGoal: addGoalInput!): User
     addStep(inputStep: addStepInput!): Goal
     addComment(inputComment: addCommentInput!): Step
