@@ -1,21 +1,22 @@
 import React from "react";
 import AddGoalForm from "../components/AddGoalForm";
-import Card from 'react-bootstrap/Card';
+import Card from "react-bootstrap/Card";
+import "../scss/MyProfile.scss";
 
-export default function Profile() {
+export default function MyProfile() {
   return (
     <div>
       <h1>My Profile</h1>
       <h2 className="username">Displays Username</h2>
-      <AddGoalForm />
-      <h2>Goals:</h2>
-      <Card>
-        <Card.Header>Username of goal owner</Card.Header>
+
+      <h2 className="addGoalTitle">
+        <span>Goals: </span>
+        <AddGoalForm />
+      </h2>
+      <Card className="homeCard">
+        <Card.Header>Title of Goal</Card.Header>
         <Card.Body>
-          <Card.Title>Title of Goal</Card.Title>
-          <Card.Text>
-          Goal Description
-          </Card.Text>
+          <Card.Title>Goal Description</Card.Title>
         </Card.Body>
       </Card>
     </div>

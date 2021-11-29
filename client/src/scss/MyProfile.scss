@@ -1,0 +1,44 @@
+@import "../App.scss";
+
+div {
+  text-align: center;
+  padding: 0.2rem;
+
+  .homeCard {
+    background-color: rgba(245, 206, 78, 0.5);
+  }
+
+  .addGoalTitle {
+    display: inline-flex;
+
+    span {
+      font-size: 1.8rem;
+      padding: 0.5rem;
+    }
+  }
+
+  .addGoalButton {
+    font-size: 1.8rem;
+    text-align: center;
+    align-items: center;
+    padding: 0rem 0.5rem;
+    margin: 0 0.5rem;
+  }
+
+  form {
+    background-color: rgba(245, 206, 78, 0.5);
+
+    input {
+      margin: 0.2rem 0;
+      width: 90%;
+    }
+
+    .buttonDiv {
+      display: inline-block;
+
+      Button {
+        margin: 0.5rem 0.5rem;
+      }
+    }
+  }
+}
