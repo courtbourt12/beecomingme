@@ -6,6 +6,21 @@ $width: 768px;
 $primaryFont: "Dancing Script", cursive;
 $secondaryFont: "Indie Flower", cursive;
 
+#root {
+  font-family: $secondaryFont;
+  font-weight: bolder;
+
+  background: linear-gradient(
+      to right,
+      rgba(248, 248, 246, 0.5),
+      rgba(248, 248, 246, 0.5)
+    ),
+    url("./assets/img/honeycomb.png") center top;
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
+}
+
 @mixin mobile {
   @media (max-width: #{$width}) {
     @content;

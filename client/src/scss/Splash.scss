@@ -1,24 +1,25 @@
 @import "../App.scss";
 
 main {
-  background: linear-gradient(
-      to right,
-      rgba(245, 206, 78, 0.8),
-      rgba(245, 206, 78, 0.1)
-    ),
-    url("../assets/img/bee.png") center top;
-  background-size: cover;
-  width: 100vw;
-
+  
   .home {
-    font-family: $secondaryFont;
     padding: 1rem;
     font-size: 1.8rem;
     text-align: center;
+
     width: 95vw;
 
-    card {
-      opacity: 1;
+    .homeCard {
+      background-color: rgba(245, 206, 78, 0.5);
+    }
+
+    .buttonDiv {
+      display: inline-block;
+      padding: 0.5rem;
+
+      button {
+        margin: 1rem;
+      }
     }
     p {
       padding: 5px 0;

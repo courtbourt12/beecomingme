@@ -1,5 +1,5 @@
 import React from "react";
-import "./App.scss"
+import "./scss/MyGoalDisplay.scss";
 import MyGoalDisplay from "./pages/MyGoalDisplay";
 import {
   ApolloClient,
@@ -8,7 +8,7 @@ import {
   createHttpLink,
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
-import 'bootstrap/dist/css/bootstrap.min.css'
+import "bootstrap/dist/css/bootstrap.min.css";
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({

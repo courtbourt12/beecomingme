@@ -1,6 +1,6 @@
 import { React, useState } from "react";
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
 
 export default function AddStepForm() {
   const [show, setShow] = useState(false);
@@ -8,8 +8,22 @@ export default function AddStepForm() {
   const handleShow = () => setShow(true);
   return (
     <div>
-      <Button variant="outline-dark" onClick={handleShow}>+</Button>
-      <Modal show={show} onHide={handleClose}>
+      <Button
+        className="addStepButton"
+        placeholder="Add Step"
+        variant="outline-dark"
+        onClick={handleShow}
+      >
+        +
+      </Button>
+      <Modal
+        show={show}
+        onHide={handleClose}
+        size="lg"
+        centered
+        backdrop="static"
+        keyboard={false}
+      >
         <form className="addStepForm">
           <input
             name="addStepTitle"
@@ -23,7 +37,6 @@ export default function AddStepForm() {
             placeholder="Description*"
             type="text"
           />
-          <Button variant="outline-dark" onClick={handleClose}>X</Button>
           <br />
           <label name="dueDate">Due Date</label>
           <input name="dueDate" id="dueDate" type="date" />
@@ -34,7 +47,18 @@ export default function AddStepForm() {
             <option value="3">Complete</option>
           </select>
           <br />
-          <Button className = "addStep" variant="outline-dark" onClick={handleClose}>Add Step</Button>
+          <div className="buttonDiv">
+            <Button variant="outline-dark" onClick={handleClose}>
+              Close
+            </Button>
+            <Button
+              className="addStep"
+              variant="outline-dark"
+              onClick={handleClose}
+            >
+              Add Step
+            </Button>
+          </div>
         </form>
       </Modal>
     </div>
