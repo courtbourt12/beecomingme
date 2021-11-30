@@ -49,7 +49,7 @@ const App = () => (
         <Route exact path="/" component={Splash} />
         <Route exact path="/friendgoals" component={FriendGoals} />
         <Route exact path="/goaldisplay" component={GoalDisplay} />
-        <Route exact path="/mygoals" component={MyProfile} />
+        <Route exact path="/myprofile" component={MyProfile} />
         <Route exact path="/mygoaldisplay" component={MyGoalDisplay} />
         <Route render={() => <h1 className="display-2">Wrong page!</h1>} />
       </Switch>
