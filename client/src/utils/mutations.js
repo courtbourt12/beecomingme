@@ -11,7 +11,7 @@ export const LOGIN_USER = gql`
 
 export const ADD_USER = gql`
   mutation addUser($inputUser: addUserInput!) {
-    addUser(addUser: $inputUser) {
+    addUser(inputUser: $inputUser) {
         username
         email
         first_name
@@ -23,35 +23,52 @@ export const ADD_USER = gql`
 
 export const ADD_GOAL = gql`
   mutation addGoal($inputGoal: addGoalInput!) {
-    addGoal(addGoal: $inputGoal) {
+    addGoal(inputGoal: $inputGoal) {
+      _id
+      goals {
         _id
         title
         description
       }
     }
+  }
 `;
 
 export const ADD_STEP = gql`
   mutation addStep($inputStep: addStepInput!) {
-    addStep(addStep: $inputStep) {
+    addStep(inputStep: $inputStep) {
+      _id
+      goals {
         _id
-        title
-        description
-        status
-        due
+        steps {
+          _id
+          title
+          description
+          status
+          due
       }
     }
+  }
+}
 `;
 
 export const ADD_COMMENT = gql`
   mutation addComment($inputComment: addCommentInput!) {
-    addComment(addComment: $inputComment) {
+    addComment(inputComment: $inputComment) {
+      _id
+      goals {
         _id
-        description
-        user
-        created
+        steps {
+          _id
+          comments {
+            description
+            username
+            created
+          }
+        }
       }
     }
+  }
 `;
 
 export const REMOVE_GOAL = gql`
