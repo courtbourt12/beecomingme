@@ -1,13 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import DisplayGoalForm from "../components/AddGoalForm";
+import AddGoalForm from "../components/AddGoalForm";
 import Card from "react-bootstrap/Card";
 import "../scss/MyProfile.scss";
 import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_ME } from "../utils/queries";
 import { ADD_GOAL } from "../utils/mutations";
 
-
+// Performing user query.
 export default function MyProfile() {
   const savedUser = JSON.parse(localStorage.getItem("user"));
   const userId = savedUser._id;
@@ -29,7 +29,7 @@ export default function MyProfile() {
 
         <h2 className="addGoalTitle">
           <span>Goals: </span>
-          <DisplayGoalForm />
+          <AddGoalForm />
         </h2>
         {userData.map((goal) => {
           return (

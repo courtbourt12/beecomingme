@@ -51,9 +51,7 @@ export default function DisplayGoalForm() {
     });
   }
 
-
-
-  // Handling form input.
+  // Handling form input for the modal.
     return (
       <div>
         <Button

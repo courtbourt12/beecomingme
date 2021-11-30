@@ -30,10 +30,6 @@ export default function LoginForm() {
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    console.log(event.target);
-    console.log("the value" + value)
-    console.log("the name" + name)
-
     setUserFormData({ ...userFormData, [name]: value });
   };
 
