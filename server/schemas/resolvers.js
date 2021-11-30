@@ -84,14 +84,18 @@ console.log("allGoals ",allGoals)
     },
     // Add new Goal
     addGoal: async (parent, { inputGoal }) => {
-      console.log("inputGoal", inputGoal)
-      const goal = await Goal.create({...inputGoal});
-      return goal._id;
+      const user = await User.findById(inputGoal.user)
+      user.goals.push({...inputGoal});
+      console.log("user  ", user)
+      return user;
     },
     // Add new Step
-    addStep: async (parent, body) => {
-      const step = await Step.create(body);
-      return step._id;
+    addStep: async (parent, { inputStep }) => {
+      const user = await User.findById(inputStep.user);
+      const goal = user.goals.findById(inputStep.goal);
+      const step = goal.steps;
+      step.push({...inputStep});
+      return goal;
     },
     // Add new Comment
     addComment: async (parent, body) => {
