@@ -1,7 +1,7 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 export const QUERY_ME = gql`
-  {
+  query user($user_id: ID!){
     user(user_id: $user_id) {
       _id
       username
@@ -10,23 +10,23 @@ export const QUERY_ME = gql`
       last_name
       dob
       password
-      goals{
+      goals {
         _id
         title
         description
-        steps{
+        steps {
           _id
           title
           description
           status
-          comments{
+          comments {
             description
             user
             created
           }
           due
         }
-        friends{
+        friends {
           _id
         }
         encouragement
