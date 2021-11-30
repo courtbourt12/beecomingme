@@ -33,7 +33,7 @@ const typeDefs = gql`
   type Comment {
     _id: ID!
     description: String!
-    user: String
+    username: String
     created: String!
   }
 
@@ -77,8 +77,11 @@ const typeDefs = gql`
 
   input addCommentInput {
     description: String
-    user: String
+    username: String
     created: String
+    user: ID!
+    goal: ID!
+    step: ID!
   }
 
   type Mutation {
@@ -86,8 +89,8 @@ const typeDefs = gql`
 
     addUser(inputUser: addUserInput!): User
     addGoal(inputGoal: addGoalInput!): User
-    addStep(inputStep: addStepInput!): Goal
-    addComment(inputComment: addCommentInput!): Step
+    addStep(inputStep: addStepInput!): User
+    addComment(inputComment: addCommentInput!): User
 
     removeGoal(goal_id: ID!): User
     removeComment(step_id: ID!, comment_id: ID!): Step
