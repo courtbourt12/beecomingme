@@ -9,7 +9,7 @@ $secondaryFont: "Indie Flower", cursive;
 #root {
   font-family: $secondaryFont;
   font-weight: bolder;
-
+  min-height: 100vh;
   background: linear-gradient(
       to right,
       rgba(248, 248, 246, 0.5),

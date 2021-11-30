@@ -17,7 +17,7 @@ export default function GoalDisplay() {
           <Card.Text>
             Due Date
           </Card.Text>
-          <Accordion defaultActiveKey="0" flush>
+          <Accordion defaultActiveKey="1" flush>
             <Accordion.Item eventKey="0">
               <Accordion.Header style= {{background: "rgba(255, 255, 255, 0.822)"}}>Steps</Accordion.Header>
               <Accordion.Body>
@@ -30,7 +30,7 @@ export default function GoalDisplay() {
                   </Card.Text>
                       <h4>Comments</h4>
                       <AddCommentForm />
-                  <Accordion defaultActiveKey="0" flush>
+                  <Accordion defaultActiveKey="1" flush>
                     <Accordion.Item eventKey="0">
                       <Accordion.Header style= {{background: "rgba(255, 255, 255, 0.822)"}}>Comments</Accordion.Header>
                       <Accordion.Body>
