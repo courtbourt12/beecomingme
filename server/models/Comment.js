@@ -5,7 +5,7 @@ const commentSchema = new Schema({
     type: String,
     required: true,
   },
-  user: {
+  username: {
     type: String,
   },
   created: {
