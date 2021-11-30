@@ -37,11 +37,6 @@ const typeDefs = gql`
     created: String!
   }
 
-  type Auth {
-    token: ID!
-    user: User
-  }
-
   type Query {
     user(user_id: ID!): User
     friends(email: String!): User
@@ -75,6 +70,12 @@ const typeDefs = gql`
     due: String
   }
 
+  input addFriendInput {
+    username: String
+    user: ID!
+    goal: ID!
+  }
+
   input addCommentInput {
     description: String
     username: String
@@ -90,15 +91,17 @@ const typeDefs = gql`
     addUser(inputUser: addUserInput!): User
     addGoal(inputGoal: addGoalInput!): User
     addStep(inputStep: addStepInput!): User
+    addFriend(inputFriend: addFriendInput!): User
     addComment(inputComment: addCommentInput!): User
 
-    removeGoal(goal_id: ID!): User
-    removeComment(step_id: ID!, comment_id: ID!): Step
-
-    updateUser(user_id: ID!): User
-    updateGoal(goal_id: ID!): User
-    updateStep(step_id: ID!): Goal
-    updateComment(comment_id: ID!): Step
+    removeGoal(user_id: ID!, goal_id: ID!): User
+    removeStep(user_id: ID!, goal_id: ID!, step_id: ID!): User
+    removeComment(
+      user_id: ID!
+      goal_id: ID!
+      step_id: ID!
+      comment_id: ID!
+    ): User
   }
 `;
 

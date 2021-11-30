@@ -1,6 +1,5 @@
 const { AuthenticationError } = require("apollo-server-express");
 const { User } = require("../models/User");
-// const { signToken } = require("../utils/auth");
 
 const resolvers = {
   Query: {
@@ -12,8 +11,6 @@ const resolvers = {
 
         return userData;
       }
-
-      // throw new AuthenticationError("Not logged in");
     },
     friends: async (parent, { email }) => {
       return await User.findOne({ email });
@@ -33,16 +30,20 @@ const resolvers = {
     },
     friendGoals: async (parent, { username }) => {
       const allUsers = await User.find({});
-      console.log("allUsers ", allUsers);
+      const arrayOfGoals = [];
       const allGoals = allUsers
         .map((user) => {
-          console.log("user.goals ", user.goals);
           return user.goals;
         })
         .flat()
-        .filter((goal) => goal.friends[0].includes(username));
-      console.log("allGoals ", allGoals);
-      return allGoals;
+        .filter((goal) => {
+          let friendArray = goal.friends.map((friend) => {
+            if (friend.username === username) {
+              return arrayOfGoals.push(goal);
+            }
+          });
+        });
+      return arrayOfGoals;
     },
     steps: async (parent, { user_id, goal_id }) => {
       const userArray = await User.find({ _id: user_id });
@@ -123,19 +124,27 @@ const resolvers = {
       console.log("user " + user);
       return user;
     },
+    addFriend: async (parent, { inputFriend }) => {
+      const user = await User.findOneAndUpdate(
+        { _id: inputFriend.user },
+        {
+          $addToSet: {
+            "goals.$[outer].friends": {
+              username: inputFriend.username,
+            },
+          },
+        },
+        {
+          arrayFilters: [{ "outer._id": inputFriend.goal }],
+          new: true,
+        }
+      );
+      console.log("user " + user);
+      return user;
+    },
 
     // Add new Comment
-    // addComment: async (parent, body) => {
-    //   const comment = await Comment.create(body);
-    //   return comment._id;
-    // },
-    //   User.findOneAndUpdate(
-    //     {  _id: "Manasa" },
-    //     { $push: { "sensors.$[outer].measurements.$[inner].example": { "time": req.body.time } } },
-    //     { "arrayFilters:" [{"outer._id": ObjectId("57da0a4bf3884d1fb2234c74"), {"inner._id": ObjectId("57da0a4bf3884d1fb2234c74"}}]
-    // );
     addComment: async (parent, { inputComment }) => {
-      console.log(inputComment);
       const user = await User.findOneAndUpdate(
         { _id: inputComment.user },
         {
@@ -149,6 +158,7 @@ const resolvers = {
           },
         },
         {
+          multi: true,
           arrayFilters: [
             { "outer._id": inputComment.goal },
             { "inner._id": inputComment.step },
@@ -156,62 +166,62 @@ const resolvers = {
           new: true,
         }
       );
-
-      console.log("user " + user);
       return user;
     },
     // Remove Comment
-    removeComment: async (parent, { step_id, comment_id }) => {
-      return Step.findOneAndUpdate(
-        { _id: step_id },
-        { $pull: { comments: { _id: comment_id } } },
-        { new: true }
+    removeComment: async (
+      parent,
+      { user_id, goal_id, step_id, comment_id }
+    ) => {
+      const user = await User.findOneAndUpdate(
+        { _id: user_id },
+        {
+          $pull: {
+            "goals.$[outer].steps.$[inner].comments": {
+              _id: comment_id,
+            },
+          },
+        },
+        {
+          multi: true,
+          arrayFilters: [{ "outer._id": goal_id }, { "inner._id": step_id }],
+          new: true,
+        }
       );
+      return user;
+    },
+    // Remove step
+    removeStep: async (parent, { user_id, goal_id, step_id }) => {
+      const user = await User.findOneAndUpdate(
+        { _id: user_id },
+        {
+          $pull: {
+            "goals.$[inner].steps": {
+              _id: step_id,
+            },
+          },
+        },
+        {
+          arrayFilters: [{ "inner._id": goal_id }],
+          new: true,
+        }
+      );
+      return user;
     },
     // Remove goal
-    removeGoal: async (parent, { goal_id }) => {
-      return Goal.findOneAndDelete({ _id: goal_id });
-    },
-    // Update User information
-    updateUser: async (parent, { user, body }) => {
-      return User.findOneAndUpdate(
-        { _id: user._id },
+    removeGoal: async (parent, { user_id, goal_id }) => {
+      const user = await User.findOneAndUpdate(
+        { _id: user_id },
         {
-          $addToSet: { addUser: { body } },
+          $pull: {
+            goals: { _id: goal_id },
+          },
         },
         {
           new: true,
-          runValidators: true,
         }
       );
-    },
-    updateUser: async (parent, body) => {
-      return await User.findOneAndUpdate(
-        { _id: body._id },
-        { body },
-        { new: true }
-      );
-    },
-    updateGoal: async (parent, body) => {
-      return await Goal.findOneAndUpdate(
-        { _id: body._id },
-        { body },
-        { new: true }
-      );
-    },
-    updateStep: async (parent, body) => {
-      return await Step.findOneAndUpdate(
-        { _id: body._id },
-        { body },
-        { new: true }
-      );
-    },
-    updateComment: async (parent, body) => {
-      return await Comment.findOneAndUpdate(
-        { _id: body._id },
-        { body },
-        { new: true }
-      );
+      return user;
     },
   },
 };
