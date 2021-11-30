@@ -34,9 +34,7 @@ export default function LoginForm() {
   };
 
   const handleFormSubmit = async (event) => {
-
     event.preventDefault();
-
     const form = event.currentTarget;
 
     if (form.checkValidity() === false) {
@@ -47,18 +45,13 @@ export default function LoginForm() {
       const { data } = await login({
         variables: { ...userFormData },
       });
-      console.log("data ",data)
       localStorage.setItem("user", JSON.stringify(data.login));
       window.location.assign('/myprofile');
       handleClose();
-      console.log("submit success " + userFormData.email + " " + userFormData.password)
-
-      console.log("heres the data" + data);
       // Auth.login(data.login.token);
     } catch (e) {
       console.error(e);
     }
-
     // clear form values
     setUserFormData({
       email: "",
@@ -117,9 +110,15 @@ export default function LoginForm() {
             </Form.Control.Feedback>
           </Form.Group>
           <Button
+            variant="outline-dark"
+            onClick={handleClose}
+          >
+            Close
+          </Button>
+          <Button
             disabled={!(userFormData.email && userFormData.password)}
             type="submit"
-            variant="success"
+            variant="outline-dark"
           >
             Submit
           </Button>
