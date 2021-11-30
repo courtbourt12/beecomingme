@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import AddGoalForm from "../components/AddGoalForm";
+import DisplayGoalForm from "../components/AddGoalForm";
 import Card from "react-bootstrap/Card";
 import "../scss/MyProfile.scss";
 import { useQuery, useMutation } from "@apollo/client";
@@ -29,7 +29,7 @@ export default function MyProfile() {
 
         <h2 className="addGoalTitle">
           <span>Goals: </span>
-          <AddGoalForm />
+          <DisplayGoalForm />
         </h2>
         {userData.map((goal) => {
           return (
