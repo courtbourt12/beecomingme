@@ -20,7 +20,7 @@ export default function AddGoalForm() {
 const [ inputTitle, setInputTitle] = useState('');
 const [ inputDescription, setInputDescription] = useState('');
 
-// const [addGoal, { error }] = useMutation(ADD_GOAL) 
+// const [addGoal, { error }] = useMutation(ADD_GOAL)
 
 const handleSubmit = (event) => {
   event.preventDefault();
