@@ -63,10 +63,13 @@ const typeDefs = gql`
   input addGoalInput {
     title: String
     description: String
+    user: ID!
   }
 
   input addStepInput {
     title: String
+    user: ID!
+    goal: ID!
     description: String
     status: Int
     due: String
