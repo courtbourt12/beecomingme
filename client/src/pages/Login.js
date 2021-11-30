@@ -30,6 +30,9 @@ export default function LoginForm() {
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
+    console.log(event.target);
+    console.log("the value" + value)
+    console.log("the name" + name)
 
     setUserFormData({ ...userFormData, [name]: value });
   };
@@ -50,7 +53,7 @@ export default function LoginForm() {
       });
       console.log("data ",data)
       localStorage.setItem("user", JSON.stringify(data.login));
-      window.location.assign('/mygoals');
+      window.location.assign('/myprofile');
       handleClose();
       console.log("submit success " + userFormData.email + " " + userFormData.password)
 

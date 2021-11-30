@@ -84,9 +84,21 @@ console.log("allGoals ",allGoals)
     },
     // Add new Goal
     addGoal: async (parent, { inputGoal }) => {
-      const user = await User.findById(inputGoal.user)
-      user.goals.push({...inputGoal});
-      console.log("user  ", user)
+      const user = await User.findOneAndUpdate(
+        { _id: inputGoal.user },
+        {
+          $addToSet: {
+            goals: {
+              title: inputGoal.title,
+              description: inputGoal.description,
+            },
+          },
+        },
+        {
+          new: true,
+          runValidators: true,
+        }
+      );
       return user;
     },
     // Add new Step
