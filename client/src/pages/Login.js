@@ -50,7 +50,7 @@ export default function LoginForm() {
       });
       console.log("data ",data)
       localStorage.setItem("user", JSON.stringify(data.login));
-      window.location.assign('/mygoals');
+      window.location.assign('/myprofile');
       handleClose();
       console.log("submit success " + userFormData.email + " " + userFormData.password)
 
