@@ -21,7 +21,7 @@ export const QUERY_ME = gql`
           status
           comments {
             description
-            user
+            username
             created
           }
           due

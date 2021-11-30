@@ -33,7 +33,6 @@ export default function DisplayGoalForm() {
         user: userID
       }
 
-<<<<<<< HEAD
       const { data } = await addGoal({
         variables: { inputGoal: {...toMutate} },
         });
@@ -43,23 +42,6 @@ export default function DisplayGoalForm() {
     } catch (error) {
       console.error(error);
     }
-=======
-// Handling form input.
-
-const [ inputTitle, setInputTitle] = useState('');
-const [ inputDescription, setInputDescription] = useState('');
-
-// const [addGoal, { error }] = useMutation(ADD_GOAL)
-
-const handleSubmit = (event) => {
-  event.preventDefault();
-  const newT = inputTitle
-  const newD = inputDescription
-  newGoal.push({title: newT,
-                description: newD})
-  console.log(inputTitle, inputDescription)
-  console.log(newGoal)
->>>>>>> 908e508767bb449706ed0fdd4ca02244c8fbe41f
 
     // clear form values
     setGoalData({
