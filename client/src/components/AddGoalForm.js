@@ -1,30 +1,31 @@
 import { React, useState } from "react";
-// import { InputGroup } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import { useMutation } from "@apollo/client";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
-// import { useHistory } from 'react-router-dom';
 import { ADD_GOAL } from "../utils/mutations";
 
 export default function DisplayGoalForm() {
+
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
   const user = JSON.parse(localStorage.getItem("user"));
   const userID = user._id
+
   const [goalData, setGoalData] = useState({
     title: "",
     description: ""
   });
-  
-  const [addGoal, { data, loading, error }] = useMutation(ADD_GOAL);
+
+  const [addGoal] = useMutation(ADD_GOAL);
+
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setGoalData({ ...goalData, [name]: value});
   };
- 
-  // handleInputChange({user: userID});
+
   const AddGoal = async (event) => {
     event.preventDefault();
     try {
@@ -36,9 +37,9 @@ export default function DisplayGoalForm() {
       const { data } = await addGoal({
         variables: { inputGoal: {...toMutate} },
         });
-        
+
       handleClose();
-      
+
     } catch (error) {
       console.error(error);
     }
@@ -125,4 +126,3 @@ export default function DisplayGoalForm() {
       </div>
     );
   }
-

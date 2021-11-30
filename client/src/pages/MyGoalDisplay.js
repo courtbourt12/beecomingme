@@ -8,6 +8,9 @@ import Accordion from "react-bootstrap/Accordion";
 import Button from "react-bootstrap/Button";
 import ListGroup from "react-bootstrap/ListGroup";
 import "../scss/MyGoalDisplay.scss";
+import { useQuery, useMutation } from "@apollo/client";
+import { QUERY_ME } from "../utils/queries";
+import { ADD_STEP, ADD_FRIEND, REMOVE_STEP, REMOVE_COMMENT } from "../utils/mutations";
 
 export default function MyGoalDisplay() {
   return (
