@@ -34,4 +34,28 @@ export const QUERY_ME = gql`
     }
   }
 `;
-
+export const QUERY_FRIEND_GOALS = gql`
+  query friendGoals($username: String!) {
+    friendGoals(username: $username) {
+        _id
+        title
+        description
+        steps {
+          _id
+          title
+          description
+          status
+          comments {
+            description
+            username
+            created
+          }
+          due
+        }
+        friends {
+          _id
+        }
+        encouragement
+      }
+    }
+`;
