@@ -12,11 +12,8 @@ export const LOGIN_USER = gql`
 export const ADD_USER = gql`
   mutation addUser($inputUser: addUserInput!) {
     addUser(inputUser: $inputUser) {
-        username
-        email
-        first_name
-        last_name
-        dob
+      _id  
+      username
     }
   }
 `;
@@ -58,7 +55,6 @@ export const ADD_FRIEND = gql`
       goals {
         _id
         friends {
-          _id
           username
         }
       }

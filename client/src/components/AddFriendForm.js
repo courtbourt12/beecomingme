@@ -1,11 +1,60 @@
 import { React, useState } from "react";
 import Button from "react-bootstrap/Button";
+import { useQuery, useMutation } from "@apollo/client";
 import Modal from "react-bootstrap/Modal";
+import Form from "react-bootstrap/Form";
+import { ADD_FRIEND } from "../utils/mutations";
+import { QUERY_FRIEND } from "../utils/queries";
 
 export default function AddFriendForm() {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const user = JSON.parse(localStorage.getItem("user"));
+  const userID = user._id;
+
+  let url = window.location.href;
+  let goalID = url.substring(url.length - 24, url.length);
+
+  const [friendData, setFriendData] = useState({});
+
+  const [addFriend] = useMutation(ADD_FRIEND);
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setFriendData({ ...friendData, [name]: value });
+  };
+
+  const { loading, data } = useQuery(QUERY_FRIEND, {
+    variables: { email: friendData.email },
+  });
+
+  const friendUsername = data?.friends?.username;
+
+  // console.log(friendUsername);
+  const AddFriend = async (event) => {
+    event.preventDefault();
+    try {
+      const toMutate = {
+        username: friendUsername,
+        user: userID,
+        goal: goalID,
+      };
+
+      const { data } = await addFriend({
+        variables: { inputFriend: { ...toMutate } },
+      });
+
+      handleClose();
+    } catch (error) {
+      console.error(error);
+    }
+
+    // clear form values
+    setFriendData({});
+  };
+
   return (
     <div>
       <svg
@@ -32,26 +81,30 @@ export default function AddFriendForm() {
         backdrop="static"
         keyboard={false}
       >
-        <form className="addFriendForm">
-          <input
-            name="addFriend"
-            id="addFriend"
-            placeholder="Friend*"
-            type="text"
-          />
+        <Form className="addFriendForm" onSubmit={AddFriend}>
+          <Form.Group>
+            <Form.Label htmlFor="username">Add a Friend by email</Form.Label>
+            <Form.Control
+              type="input"
+              name="email"
+              id="email"
+              onChange={handleInputChange}
+              required
+            />
+            <Form.Control.Feedback type="invalid">
+              Friend's username is required!
+            </Form.Control.Feedback>
+          </Form.Group>
+
           <div className="buttonDiv">
             <Button variant="outline-dark" onClick={handleClose}>
               Close
             </Button>
-            <Button
-              className="addFriend"
-              variant="outline-dark"
-              onClick={handleClose}
-            >
+            <Button className="addFriend" variant="outline-dark" type="submit">
               Add Friend
             </Button>
           </div>
-        </form>
+        </Form>
       </Modal>
     </div>
   );

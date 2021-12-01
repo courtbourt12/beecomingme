@@ -10,12 +10,14 @@ import ListGroup from "react-bootstrap/ListGroup";
 import "../scss/MyGoalDisplay.scss";
 import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_ME } from "../utils/queries";
+
 import {
   ADD_STEP,
   ADD_FRIEND,
   REMOVE_STEP,
   REMOVE_COMMENT,
 } from "../utils/mutations";
+
 
 export default function MyGoalDisplay() {
   const savedUser = JSON.parse(localStorage.getItem("user"));

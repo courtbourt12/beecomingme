@@ -3,19 +3,16 @@ import { Link } from "react-router-dom";
 import DisplayGoalForm from "../components/AddGoalForm";
 import Card from "react-bootstrap/Card";
 import "../scss/MyProfile.scss";
-import { useQuery, useMutation } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import { QUERY_ME } from "../utils/queries";
-import { ADD_GOAL } from "../utils/mutations";
 
 // Performing user query.
 export default function MyProfile() {
   const savedUser = JSON.parse(localStorage.getItem("user"));
   const userId = savedUser._id;
-  const { loading, error, data } = useQuery(QUERY_ME, {
+  const { loading, data } = useQuery(QUERY_ME, {
     variables: { user_id: userId }
   });
-  const [addGoal] = useMutation(ADD_GOAL);
-
 
   const userData = data?.user.goals || {};
 
