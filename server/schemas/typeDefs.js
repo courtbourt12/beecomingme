@@ -19,6 +19,8 @@ const typeDefs = gql`
     steps: [Step]
     friends: [User]
     encouragement: Int
+    ownerID: String
+    ownerName: String
   }
 
   type Step {

@@ -24,8 +24,7 @@ export default function MyProfile() {
   } else {
     return (
       <div>
-        <h1>My Profile</h1>
-        <h2 className="username">Displays Username</h2>
+        <h1 className="username">{data.user.username}'s Profile</h1>
 
         <h2 className="addGoalTitle">
           <span>Goals: </span>

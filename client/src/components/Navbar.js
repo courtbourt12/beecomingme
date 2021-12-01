@@ -18,12 +18,9 @@ const AppNavbar = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link as={Link} to="/mygoals">My Goals</Nav.Link>
+            <Nav.Link as={Link} to="/myprofile">My Profile</Nav.Link>
             <Nav.Link as={Link} to="/friendgoals">Friends' Goals</Nav.Link>
-            <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-              <NavDropdown.Item >Edit Profile</NavDropdown.Item>
-              <NavDropdown.Item as={Link} to="/">Logout</NavDropdown.Item>
-            </NavDropdown>
+              <Nav.Link as={Link} to="/">Logout</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

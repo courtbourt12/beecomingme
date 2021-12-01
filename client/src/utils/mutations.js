@@ -51,7 +51,20 @@ export const ADD_STEP = gql`
   }
 }
 `;
-
+export const ADD_FRIEND = gql`
+  mutation addFriend($inputFriend: addFriendInput!) {
+    addFriend(inputFriend: $inputFriend) {
+      _id
+      goals {
+        _id
+        friends {
+          _id
+          username
+        }
+      }
+    }
+  }
+`;
 export const ADD_COMMENT = gql`
   mutation addComment($inputComment: addCommentInput!) {
     addComment(inputComment: $inputComment) {

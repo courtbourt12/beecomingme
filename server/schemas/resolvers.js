@@ -29,20 +29,25 @@ const resolvers = {
       });
     },
     friendGoals: async (parent, { username }) => {
-      const allUsers = await User.find({});
+      const allUsers = await User.find({}).lean();
       const arrayOfGoals = [];
       const allGoals = allUsers
         .map((user) => {
-          return user.goals;
-        })
-        .flat()
-        .filter((goal) => {
-          let friendArray = goal.friends.map((friend) => {
-            if (friend.username === username) {
-              return arrayOfGoals.push(goal);
+          const enrichedGoals = user.goals.map((g) => {
+// console.log("g ", g)
+            return { ...g, ownerID: user._id, ownerName: user.username };
+          })
+          return enrichedGoals;
+        }).flat().filter((goal) => {
+          console.log("goal ", goal)
+           goal.friends.forEach((friend) => {
+             if (friend.username === username) {
+               console.log("friend ", friend);
+            arrayOfGoals.push(goal);
             }
           });
         });
+      console.log("arrayOfGoals ", arrayOfGoals)
       return arrayOfGoals;
     },
     steps: async (parent, { user_id, goal_id }) => {
