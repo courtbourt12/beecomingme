@@ -8,6 +8,13 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 // import LoginForm from "../pages/Login";
 
 const AppNavbar = () => {
+  
+ const logout = () => {
+    // Clear user token and profile data from localStorage
+    localStorage.removeItem('user');
+    // this will reload the page and reset the state of the application
+    window.location.assign('/');
+  }
   return (
     <>
       <Navbar bg="light" expand="lg">
@@ -24,7 +31,7 @@ const AppNavbar = () => {
               <Nav.Link as={Link} to="/friendgoals">
                 Friends' Goals
               </Nav.Link>
-              <Nav.Link as={Link} to="/">
+              <Nav.Link onClick={logout} to="/">
                 Logout
               </Nav.Link>
             </Nav>
