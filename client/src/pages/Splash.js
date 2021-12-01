@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
+// import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
+import "../scss/Splash.scss";
+import SignUp from "./SignUp"
+import Login from "./Login"
+
 
 export default function Splash() {
   const [data, setData] = useState(null);
@@ -15,13 +19,13 @@ export default function Splash() {
         throw res;
       })
       .then((data) => {
-        console.log(data.length)
-        const index = Math.floor(Math.random()*data.length)
+        console.log(data.length);
+        const index = Math.floor(Math.random() * data.length);
         setData(data[index].text);
       })
       .catch((error) => {
-          console.error("Error fetching data:, " + error);
-          console.log(error);
+        console.error("Error fetching data:, " + error);
+        console.log(error);
         setError(error);
       })
       .finally(() => {
@@ -36,48 +40,24 @@ export default function Splash() {
       <main>
         <section className="home">
           <h1 className="home">Welcome to the hive</h1>
-          <Card>
-            <Card.Header>Inspirational Quote</Card.Header>
+          <Card className="homeCard">
             <Card.Body>
               <blockquote className="blockquote mb-0">
-                <p>
-                  {data}
-                </p>
+                <p>{data}</p>
               </blockquote>
             </Card.Body>
           </Card>
           <div className="heading">
-            <p>Did someone invite you to be their accountability partner?</p>
             <p>Sign up for an account here to help them out</p>
-          </div>
-          <div>
             <p>Beecome one of us!</p>
-            <Button variant="primary" size="lg" active>
-            Sign Up
-            </Button>
-            <br />
-            <Button variant="primary" size="lg" active>
-            Login
-            </Button>
           </div>
-          <div className = "hide">
-            <h1>Goal</h1>   
-            <Card>
-              <Card.Header>Username of goal owner</Card.Header>
-              <Card.Body>
-                <Card.Title>Title of Goal</Card.Title>
-                <Card.Text>
-                Goal Description
-                </Card.Text>
-              </Card.Body>
-            </Card>
+          <div className="buttonDiv">
+            <SignUp />
+            <Login />
           </div>
         </section>
-        <footer>
-          copyright
-        </footer>
+        <footer>copyright</footer>
       </main>
     </div>
   );
 }
-

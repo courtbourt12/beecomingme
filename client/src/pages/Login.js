@@ -5,20 +5,20 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Alert from "react-bootstrap/Alert";
- 
+
 export default function LoginForm() {
   // Handling modal open and close functions.
- 
+
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
- 
+
   const [userFormData, setUserFormData] = useState({ email: "", password: "" });
   const [validated] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
- 
+
   const [login, { error }] = useMutation(LOGIN_USER);
- 
+
   useEffect(() => {
     if (error) {
       setShowAlert(true);
@@ -26,8 +26,7 @@ export default function LoginForm() {
       setShowAlert(false);
     }
   }, [error]);
- 
- 
+
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setUserFormData({ ...userFormData, [name]: value });
@@ -36,7 +35,7 @@ export default function LoginForm() {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     const form = event.currentTarget;
- 
+
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
@@ -94,7 +93,6 @@ export default function LoginForm() {
               Email is required!
             </Form.Control.Feedback>
           </Form.Group>
- 
           <Form.Group>
             <Form.Label htmlFor="password">Password</Form.Label>
             <Form.Control

@@ -4,12 +4,12 @@ import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import { useMutation } from "@apollo/client";
 import { ADD_USER } from "../utils/mutations";
- 
+
 export default function SignUp() {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
- 
+
   const [userData, setUserData] = useState({
     username: "",
     password: "",
@@ -25,7 +25,7 @@ export default function SignUp() {
     const { name, value } = event.target;
     setUserData({ ...userData, [name]: value });
   };
- 
+
   const AddUser = async (event) => {
     event.preventDefault();
     try {
@@ -39,7 +39,7 @@ export default function SignUp() {
     } catch (error) {
       console.error(error);
     }
- 
+
     // clear form values
     setUserData({
     username: "",
@@ -149,7 +149,7 @@ export default function SignUp() {
               Date of birth is required!
             </Form.Control.Feedback>
           </Form.Group>
- 
+
           <div className="buttonDiv">
             <Button variant="outline-dark" onClick={handleClose}>
               Close

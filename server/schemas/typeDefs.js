@@ -2,12 +2,13 @@ const { gql } = require("apollo-server-express");
 
 const typeDefs = gql`
   type User {
-    _id: ID!
-    username: String!
-    email: String!
-    first_name: String!
-    last_name: String!
-    dob: String!
+    _id: ID
+    username: String
+    email: String
+    first_name: String
+    last_name: String
+    dob: String
+    password: String
     goals: [Goal]
   }
 
@@ -18,6 +19,8 @@ const typeDefs = gql`
     steps: [Step]
     friends: [User]
     encouragement: Int
+    ownerID: String
+    ownerName: String
   }
 
   type Step {
@@ -32,22 +35,17 @@ const typeDefs = gql`
   type Comment {
     _id: ID!
     description: String!
-    user: String
+    username: String
     created: String!
-  }
-
-  type Auth {
-    token: ID!
-    user: User
   }
 
   type Query {
     user(user_id: ID!): User
     friends(email: String!): User
     goals(user_id: ID!): [Goal]
-    goal(goal_id: ID!): Goal
-    steps(goal_id: ID!): [Step]
-    comments(step_id: ID!): [Comment]
+    goal(user_id: ID!, goal_id: ID!): Goal
+    friendGoals(username: String!): [Goal]
+    steps(user_id: ID!, goal_id: ID!): [Step]
   }
 
   input addUserInput {
@@ -62,36 +60,50 @@ const typeDefs = gql`
   input addGoalInput {
     title: String
     description: String
+    user: ID!
   }
 
   input addStepInput {
     title: String
+    user: ID!
+    goal: ID!
     description: String
     status: Int
     due: String
   }
 
+  input addFriendInput {
+    username: String
+    user: ID!
+    goal: ID!
+  }
+
   input addCommentInput {
     description: String
-    user: String
+    username: String
     created: String
+    user: ID!
+    goal: ID!
+    step: ID!
   }
 
   type Mutation {
-    login(email: String!, password: String!): Auth
+    login(email: String!, password: String!): User
 
-    addUser(inputUser: addUserInput!): Auth
+    addUser(inputUser: addUserInput!): User
     addGoal(inputGoal: addGoalInput!): User
-    addStep(inputStep: addStepInput!): Goal
-    addComment(inputComment: addCommentInput!): Step
+    addStep(inputStep: addStepInput!): User
+    addFriend(inputFriend: addFriendInput!): User
+    addComment(inputComment: addCommentInput!): User
 
-    removeGoal(goal_id: ID!): User
-    removeComment(step_id: ID!, comment_id: ID!): Step
-
-    updateUser(user_id: ID!): User
-    updateGoal(goal_id: ID!): User
-    updateStep(step_id: ID!): Goal
-    updateComment(comment_id: ID!): Step
+    removeGoal(user_id: ID!, goal_id: ID!): User
+    removeStep(user_id: ID!, goal_id: ID!, step_id: ID!): User
+    removeComment(
+      user_id: ID!
+      goal_id: ID!
+      step_id: ID!
+      comment_id: ID!
+    ): User
   }
 `;
 

@@ -3,58 +3,81 @@ import { gql } from '@apollo/client';
 export const LOGIN_USER = gql`
   mutation login($email: String!, $password: String!) {
     login(email: $email, password: $password) {
-      token
-      user {
         _id
         username
       }
     }
-  }
 `;
 
 export const ADD_USER = gql`
   mutation addUser($inputUser: addUserInput!) {
-    addUser(addUser: $inputUser) {
-        username
-        email
-        first_name
-        last_name
-        dob
+    addUser(inputUser: $inputUser) {
+      _id  
+      username
     }
   }
 `;
 
 export const ADD_GOAL = gql`
   mutation addGoal($inputGoal: addGoalInput!) {
-    addGoal(addGoal: $inputGoal) {
+    addGoal(inputGoal: $inputGoal) {
+      _id
+      goals {
         _id
         title
         description
       }
     }
+  }
 `;
 
 export const ADD_STEP = gql`
   mutation addStep($inputStep: addStepInput!) {
-    addStep(addStep: $inputStep) {
+    addStep(inputStep: $inputStep) {
+      _id
+      goals {
         _id
-        title
-        description
-        status
-        due
+        steps {
+          _id
+          title
+          description
+          status
+          due
       }
     }
+  }
+}
 `;
-
+export const ADD_FRIEND = gql`
+  mutation addFriend($inputFriend: addFriendInput!) {
+    addFriend(inputFriend: $inputFriend) {
+      _id
+      goals {
+        _id
+        friends {
+          username
+        }
+      }
+    }
+  }
+`;
 export const ADD_COMMENT = gql`
   mutation addComment($inputComment: addCommentInput!) {
-    addComment(addComment: $inputComment) {
+    addComment(inputComment: $inputComment) {
+      _id
+      goals {
         _id
-        description
-        user
-        created
+        steps {
+          _id
+          comments {
+            description
+            username
+            created
+          }
+        }
       }
     }
+  }
 `;
 
 export const REMOVE_GOAL = gql`

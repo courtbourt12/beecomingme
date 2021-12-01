@@ -1,61 +1,150 @@
 import React from "react";
 import AddStepForm from "../components/AddStepForm";
+import EditStepForm from "../components/EditStepForm";
 import AddFriendForm from "../components/AddFriendForm";
-import Card from 'react-bootstrap/Card';
-import Accordion from 'react-bootstrap/Accordion';
-import Button from 'react-bootstrap/Button';
-import ListGroup from 'react-bootstrap/ListGroup';
+import EditGoalForm from "../components/EditGoalForm";
+import Card from "react-bootstrap/Card";
+import Accordion from "react-bootstrap/Accordion";
+import Button from "react-bootstrap/Button";
+import ListGroup from "react-bootstrap/ListGroup";
+import "../scss/MyGoalDisplay.scss";
+import { useQuery, useMutation } from "@apollo/client";
+import { QUERY_ME } from "../utils/queries";
 
-  
-  export default function MyGoalDisplay() {
+import {
+  ADD_STEP,
+  ADD_FRIEND,
+  REMOVE_STEP,
+  REMOVE_COMMENT,
+} from "../utils/mutations";
+
+
+export default function MyGoalDisplay() {
+  const savedUser = JSON.parse(localStorage.getItem("user"));
+  const userId = savedUser._id;
+
+  const { loading, data } = useQuery(QUERY_ME, {
+    variables: { user_id: userId },
+  });
+  const [addStep] = useMutation(ADD_STEP);
+  const [addFriend] = useMutation(ADD_FRIEND);
+  const [removeStep] = useMutation(REMOVE_STEP);
+  const [removeComment] = useMutation(REMOVE_COMMENT);
+
+  if (loading || !data) {
+    return <div>Loading...</div>;
+  }
+
+  let url = window.location.href;
+  let id = url.substring(url.length - 24, url.length);
+
+  const userData = data?.user.goals || {};
+  console.log("loading ", loading);
+  console.log("userData ", userData);
+
+  const thisGoal = userData.filter((goals) => {
+    if (goals._id === id) {
+      return goals;
+    }
+  });
+
+  console.log("thisGoal ", thisGoal);
+
   return (
-    <div>
-      <h1>Goal</h1>
+    <div className="myGoalDisplay">
       <div className="goalContainer">
-        <h3 className="goalTitle">Title of Goal -----------> !</h3>
-        <p className="goalDescription">Goal Description</p>
+        <h2 className="goalTitle">{thisGoal[0].title}</h2>
+        <p className="goalDescription">{thisGoal[0].description}</p>
         <div className="friendsContainer">
-          <h3>Friends: + -</h3>
-          <AddFriendForm />
-          <ul>
-            <p className="friends">Friend -</p>
-          </ul>
+            <h1>Friends </h1>
+          <h2 className="addFriends">
+            {/* make friends a block element so it's above the list */}
+            <ul>
+              {thisGoal[0].friends.map((friend) => {
+                return (
+                  <>
+                    <li>
+                      <h5 className="friends">
+                        {friend.username}
+                      </h5>
+                    </li>
+                  </>
+                );
+              })}
+            </ul>
+            <AddFriendForm />
+          </h2>
+          <ul></ul>
         </div>
         <div className="stepsContainer">
-        <h3>Steps</h3>
-       
-          <AddStepForm />
-        <ul>
-          <Card className="text-center">
-            <Card.Header>Step Title</Card.Header>
-            <Card.Body>
-              <Card.Title>Due Date</Card.Title>
-              <Card.Text>
-                Step Description
-              </Card.Text>
-              <Button variant="primary">Not Started</Button>
-              <Button variant="warning">In Progress</Button>
-              <Button variant="success">Complete</Button>
-            </Card.Body>
-            <Card.Footer className="text-muted">
-            <Accordion defaultActiveKey="0" flush>
-              <Accordion.Item eventKey="0">
-                <Accordion.Header>Comments</Accordion.Header>
-                <Accordion.Body>
-                <Card style={{ width: '18rem' }}>
-              <ListGroup variant="flush">
-                <ListGroup.Item>
-                  <span className="commentUsername">Username: </span>
-                  <span className="commentBody">Comment</span>
-                </ListGroup.Item>
-              </ListGroup>
-            </Card>
-                </Accordion.Body>
-              </Accordion.Item>
-            </Accordion>
-            </Card.Footer>
-          </Card>
-        </ul>
+          <h2 className="addSteps">
+            <span>Steps: </span>
+            <ul></ul>
+            <AddStepForm />
+          </h2>
+          {thisGoal[0].steps.map((step) => {
+                        let status;
+                        switch (step.status) {
+                          case 1:
+                            status = "Not Started";
+                            break;
+                          case 2:
+                            status = "In Progress";
+                            break;
+                          case 3:
+                            status = "Completed";
+                            break;
+                          default:
+                            status = "";
+                            break;
+                        }
+            return (
+              <Card className="homeCard stepStatusCard">
+                <Card.Header className="editStep">
+                  <span>{step.title}</span>
+                  <EditStepForm />
+                </Card.Header>
+                <Card.Body>
+                  <Card.Title>
+                    {Date("en-US", step.due).substring(0, 15)}
+                  </Card.Title>
+                  <Card.Text>{step.description}</Card.Text>
+                  <Button variant="success">{status}</Button>
+                </Card.Body>
+                <Card.Footer className="text-muted">
+                  {step.comments.map((comment) => {
+                    return (
+                      <Accordion
+                        defaultActiveKey="0"
+                        className="commentCard"
+                        flush
+                      >
+                        <Accordion.Item eventKey="0">
+                          <Accordion.Header className="commentHeader">
+                            Comment
+                          </Accordion.Header>
+                          <Accordion.Body>
+                            <Card className="singleCommentCard">
+                              <ListGroup>
+                                <ListGroup.Item>
+                                  <span className="commentUsername">
+                                    {comment.username}
+                                  </span>
+                                  <span className="commentBody">
+                                    {comment.description}
+                                  </span>
+                                </ListGroup.Item>
+                              </ListGroup>
+                            </Card>
+                          </Accordion.Body>
+                        </Accordion.Item>
+                      </Accordion>
+                    );
+                  })}
+                </Card.Footer>
+              </Card>
+            );
+          })}
         </div>
       </div>
     </div>
