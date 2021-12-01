@@ -1,28 +1,44 @@
 @import "../App.scss";
-
-.home {
-  font-family: $primaryFont;
-  padding: 1rem 0;
-  font-size: 1.8rem;
-  background: linear-gradient(
-      to right,
-      rgba(246, 224, 0, 0.8),
-      rgba(246, 224, 0, 0.1)
-    ),
-    url("../assets/img/bee.png") center top;
-  background-size: cover;
-
-  p {
-    padding: 5px 0;
-    margin: 5px 0px;
-  }
-
-  footer {
-    position: fixed;
-    bottom: 0.4rem;
-    right: 1rem;
-    text-align: center;
+ 
+main {
+ 
+  .home {
     padding: 1rem;
-    color: #0c0909;
+    font-size: 1.8rem;
+    text-align: center;
+ 
+    width: 95vw;
+ 
+    .homeCard {
+      background-color: rgba(245, 206, 78, 0.5);
+    }
+ 
+    .buttonDiv {
+      display: inline-block;
+      padding: 0.5rem;
+ 
+      button {
+        margin: 1rem;
+      }
+    }
+    p {
+      padding: 5px 0;
+      margin: 5px 0px;
+    }
+  }
+  .card {
+    margin-left: auto;
+    margin-right: auto;
+  }
+ 
+  .signUpSection {
+    margin-top: 50px;
+    width: 70%;
+  }
+ 
+  .footer {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
   }
 }
