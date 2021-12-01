@@ -18,9 +18,9 @@ export default function SignUp() {
     last_name: "",
     dob: "",
   });
-
+ 
   const [addUser] = useMutation(ADD_USER);
-
+ 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setUserData({ ...userData, [name]: value });
@@ -50,10 +50,10 @@ export default function SignUp() {
     dob: "",
     });
   };
-
+ 
   return (
     <div>
-      <Button variant="primary" size="lg" active onClick={handleShow}>
+      <Button variant="dark" size="lg" active onClick={handleShow}>
         Sign Up
       </Button>
       <Modal
@@ -163,3 +163,4 @@ export default function SignUp() {
     </div>
   );
 }
+

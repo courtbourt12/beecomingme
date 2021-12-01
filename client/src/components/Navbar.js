@@ -3,12 +3,10 @@ import { Link } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Container from "react-bootstrap/Container";
-import NavDropdown from "react-bootstrap/NavDropdown";
-// import SignUpForm from "./Register";
-// import LoginForm from "../pages/Login";
-
+import "../scss/Navbar.scss";
+ 
 const AppNavbar = () => {
-  
+ 
  const logout = () => {
     // Clear user token and profile data from localStorage
     localStorage.removeItem('user');
@@ -17,21 +15,21 @@ const AppNavbar = () => {
   }
   return (
     <>
-      <Navbar bg="light" expand="lg">
+      <Navbar className = "theNavbar" bg="dark" expand="lg">
         <Container>
-          <Navbar.Brand as={Link} to="/">
+          <Navbar.Brand className="text-white" as={Link} to="/">
             Beecoming Me
           </Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Toggle className="navbar-dark navbar-toggler-icon-light" aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link as={Link} to="/myprofile">
+              <Nav.Link className="text-white" as={Link} to="/myprofile">
                 My Profile
               </Nav.Link>
-              <Nav.Link as={Link} to="/friendgoals">
+              <Nav.Link className="text-white" as={Link} to="/friendgoals">
                 Friends' Goals
               </Nav.Link>
-              <Nav.Link onClick={logout} to="/">
+              <Nav.Link className="text-white" onClick={logout} to="/">
                 Logout
               </Nav.Link>
             </Nav>
@@ -41,5 +39,6 @@ const AppNavbar = () => {
     </>
   );
 };
-
+ 
 export default AppNavbar;
+

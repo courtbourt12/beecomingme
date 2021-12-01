@@ -27,12 +27,11 @@ export default function LoginForm() {
     }
   }, [error]);
 
-
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setUserFormData({ ...userFormData, [name]: value });
   };
-
+ 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     const form = event.currentTarget;
@@ -60,7 +59,7 @@ export default function LoginForm() {
   };
   return (
     <div>
-      <Button variant="primary" size="lg" active onClick = {handleShow}>
+      <Button variant="dark" size="lg" active onClick = {handleShow}>
         Login
       </Button>
       <Modal
@@ -94,7 +93,6 @@ export default function LoginForm() {
               Email is required!
             </Form.Control.Feedback>
           </Form.Group>
-
           <Form.Group>
             <Form.Label htmlFor="password">Password</Form.Label>
             <Form.Control
