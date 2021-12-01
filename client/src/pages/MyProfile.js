@@ -22,6 +22,7 @@ export default function MyProfile() {
     return (
       <div>
         <h1 className="username">{data.user.username}'s Profile</h1>
+
         <h2 className="addGoalTitle">
           <span>Goals: </span>
           <DisplayGoalForm />

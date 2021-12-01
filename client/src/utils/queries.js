@@ -27,7 +27,7 @@ export const QUERY_ME = gql`
           due
         }
         friends {
-          _id
+          username
         }
         encouragement
       }
@@ -37,27 +37,29 @@ export const QUERY_ME = gql`
 export const QUERY_FRIEND_GOALS = gql`
   query friendGoals($username: String!) {
     friendGoals(username: $username) {
+      _id
+      ownerID
+      ownerName
+      title
+      description
+      steps {
         _id
         title
         description
-        steps {
-          _id
-          title
+        status
+        comments {
           description
-          status
-          comments {
-            description
-            username
-            created
-          }
-          due
+          username
+          created
         }
-        friends {
-          _id
-        }
-        encouragement
+        due
       }
+      friends {
+        username
+      }
+      encouragement
     }
+  }
 `;
 export const QUERY_FRIEND = gql`
   query friends($email: String!) {
@@ -92,4 +94,5 @@ export const QUERY_FRIEND = gql`
       }
     }
   }
-`;
+`; 
+
