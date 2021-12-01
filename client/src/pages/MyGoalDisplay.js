@@ -56,9 +56,9 @@ export default function MyGoalDisplay() {
         <h2 className="goalTitle">{thisGoal[0].title}</h2>
         <p className="goalDescription">{thisGoal[0].description}</p>
         <div className="friendsContainer">
+            <h1>Friends </h1>
           <h2 className="addFriends">
             {/* make friends a block element so it's above the list */}
-            <h1>Friends </h1>
             <ul>
               {thisGoal[0].friends.map((friend) => {
                 return (
@@ -66,20 +66,6 @@ export default function MyGoalDisplay() {
                     <li>
                       <h5 className="friends">
                         {friend.username}
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          fill="currentColor"
-                          class="bi bi-trash"
-                          viewBox="0 0 16 16"
-                        >
-                          <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
-                          <path
-                            fill-rule="evenodd"
-                            d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"
-                          />
-                        </svg>
                       </h5>
                     </li>
                   </>
@@ -97,6 +83,21 @@ export default function MyGoalDisplay() {
             <AddStepForm />
           </h2>
           {thisGoal[0].steps.map((step) => {
+                        let status;
+                        switch (step.status) {
+                          case 1:
+                            status = "Not Started";
+                            break;
+                          case 2:
+                            status = "In Progress";
+                            break;
+                          case 3:
+                            status = "Completed";
+                            break;
+                          default:
+                            status = "";
+                            break;
+                        }
             return (
               <Card className="homeCard stepStatusCard">
                 <Card.Header className="editStep">
@@ -104,9 +105,11 @@ export default function MyGoalDisplay() {
                   <EditStepForm />
                 </Card.Header>
                 <Card.Body>
-                  <Card.Title>{step.due}</Card.Title>
+                  <Card.Title>
+                    {Date("en-US", step.due).substring(0, 15)}
+                  </Card.Title>
                   <Card.Text>{step.description}</Card.Text>
-                  <Button variant="success">{step.status}</Button>
+                  <Button variant="success">{status}</Button>
                 </Card.Body>
                 <Card.Footer className="text-muted">
                   {step.comments.map((comment) => {
