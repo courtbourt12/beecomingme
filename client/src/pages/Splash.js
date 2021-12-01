@@ -2,9 +2,8 @@ import React, { useState, useEffect } from "react";
 // import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import "../scss/Splash.scss";
-import SignUp from "./SignUp"
-import Login from "./Login"
-
+import SignUp from "./SignUp";
+import Login from "./Login";
 
 export default function Splash() {
   const [data, setData] = useState(null);
@@ -40,23 +39,55 @@ export default function Splash() {
       <main>
         <section className="home">
           <h1 className="home">Welcome to the hive</h1>
-          <Card className="homeCard">
+          <Card
+            className="homeCard"
+            style={{
+              borderColor: "black",
+            }}
+          >
             <Card.Body>
               <blockquote className="blockquote mb-0">
                 <p>{data}</p>
               </blockquote>
             </Card.Body>
           </Card>
-          <div className="heading">
-            <p>Sign up for an account here to help them out</p>
-            <p>Beecome one of us!</p>
-          </div>
-          <div className="buttonDiv">
-            <SignUp />
-            <Login />
-          </div>
+          <Card
+            className="signUpSection"
+            style={{
+              width: "24rem",
+              backgroundColor: "rgba(245, 206, 78, 0.5)",
+              borderColor: "black",
+            }}
+          >
+            <Card.Body>
+              <Card.Title style={{ fontWeight: "bolder" }}>
+                Beecome one of us!
+              </Card.Title>
+              <Card.Subtitle
+                className="mb-2 text-muted"
+                style={{ fontWeight: "bolder" }}
+              >
+                Sign up for an account here to help them out
+              </Card.Subtitle>
+              <Card.Text>
+                <div className="buttonDiv">
+                  <SignUp />
+                  <Login />
+                </div>
+              </Card.Text>
+            </Card.Body>
+          </Card>
         </section>
-        <footer>copyright</footer>
+        <Card
+          className="footer"
+          body
+          style={{
+            backgroundColor: "rgba(245, 206, 78, 0.5)",
+            borderColor: "black",
+          }}
+        >
+          Copyright Information
+        </Card>
       </main>
     </div>
   );
