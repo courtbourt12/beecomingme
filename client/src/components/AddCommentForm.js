@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-
-const newComment = [];
+import Form from "react-bootstrap/Form";
+import { useMutation } from "@apollo/client";
+import { ADD_COMMENT } from "../utils/mutations";
 
 export default function AddCommentForm() {
 
@@ -10,28 +11,51 @@ export default function AddCommentForm() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const [ inputComment, setInputComment] = useState('');
+  const user = JSON.parse(localStorage.getItem("user"));
+  const userID = user._id
 
-const handleSubmit = (event) => {
-  event.preventDefault();
-  const newC = inputComment
-  
-  newComment.push({comment: newC,})
-  console.log(newComment)
+  const [ commentData, setCommentData] = useState({
+    username: "",
+    description: "",
+    user: "",
+    goal: "",
+    step: ""
+  });
 
-  setInputComment('');
-  handleClose();
-};
+  const [newComment] = useMutation(ADD_COMMENT)
 
-const handleCommentChange = (e) => {
-  setInputComment(e.target.value);
-};
+  const handleCommentChange = (event) => {
+    const { value } = event.target.value;
+    console.log("event.target.value: ",event.target.value)
+    setCommentData({ value });
+  };
+
+  const AddComment = async (e) => {
+      e.preventDefault();
+      console.log("event.target.value: ",e.target.value)
+      try {
+        const { data } = await newComment({
+          variables: { inputGoal: {...commentData} },
+          });
+      } catch (err) {
+        console.error(err)
+      }
+
+    setCommentData({
+      username: "",
+      description: "",
+      user: "",
+      goal: "",
+      step: ""
+    });;
+    handleClose();
+  };
 
   return (
     <>
     <Button
-        className="addGoalButton"
-        placeholder="Add Goal"
+        className="addComment"
+        placeholder="Add Comment"
         variant="outline-dark"
         onClick={handleShow}
       >
@@ -45,7 +69,22 @@ const handleCommentChange = (e) => {
         backdrop="static"
         keyboard={false}
       >
-        <form className="addCommentForm">
+        <Form className="addCommentForm" onSubmit={ADD_COMMENT}>
+          <Form.Group>
+            <Form.Label htmlFor="title">{userID.username}</Form.Label>
+            <Form.Control
+              type="input"
+              name="title"
+              id="addCommentTitle"
+              value={userID._id}
+              onChange={handleCommentChange}
+              required
+            />
+            <Form.Control.Feedback type="invalid">
+              Comment is required!
+            </Form.Control.Feedback>
+          </Form.Group>
+        {/* <form className="">
           <input
             name="addComment"
             id="addComment"
@@ -53,9 +92,9 @@ const handleCommentChange = (e) => {
             placeholder="Comment*"
             type="text"
             onChange= {handleCommentChange}
-          />
-          <Button onClick = {handleSubmit}>Add Comment</Button>
-        </form>
+          /> */}
+          <Button onClick = {ADD_COMMENT}>Add Comment</Button>
+        </Form>
       </Modal>
     </>
   );
