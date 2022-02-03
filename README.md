@@ -53,7 +53,7 @@ http://beecomingme.com/
 
 ## Mock-Up Image
 
-![screenshot](./assets/img/screenshot.png)
+![screenshot](./assets/img/Screenshot.png)
 
 ## Contribution
 
